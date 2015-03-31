@@ -88,6 +88,7 @@ class BackUser extends \yii\db\ActiveRecord
     }
 
     /**
+     * @deprecated
      * Finds user by password reset token
      *
      * @param string $token password reset token

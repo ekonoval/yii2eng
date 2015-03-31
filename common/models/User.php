@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
+ * @deprecated
  * User model
  *
  * @property integer $id
