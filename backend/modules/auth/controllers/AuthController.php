@@ -3,6 +3,7 @@
 namespace backend\modules\auth\controllers;
 
 use backend\ext\System\BackendController;
+use backend\ext\User\BIdentity;
 use backend\modules\auth\models\BLoginForm;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -54,6 +55,13 @@ class AuthController extends BackendController
 
     public function actionTest()
     {
+        /** @var BIdentity $identity */
+        $identity = Yii::$app->user->getIdentity();
+//        $identity->generateAuthKey();
+//        $identity->save();
+
+        pa($_SESSION, $_COOKIE);
+
         echo "<h2>auth test  </h2>\n";
     }
 
