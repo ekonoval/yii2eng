@@ -1,4 +1,5 @@
 <?php
+use backend\ext\User\BIdentity;
 use backend\ext\User\BPhpAuthManager;
 use backend\ext\User\BWebUser;
 
@@ -22,7 +23,8 @@ return [
     'components' => [
         'user' => [
             'class' => BWebUser::className(),
-            'identityClass' => 'common\models\User',
+            //'identityClass' => 'common\models\User',
+            'identityClass' => BIdentity::className(),
             'enableAutoLogin' => true,
         ],
         'authManager' => [

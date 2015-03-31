@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\auth\models;
 
+use backend\ext\User\BIdentity;
 use Yii;
 use yii\base\Model;
 
@@ -13,8 +14,10 @@ class BLoginForm extends Model
     public $password;
     public $rememberMe = true;
 
-    private $_user = false;
-
+    /**
+     * @var BIdentity
+     */
+    private $user = false;
 
     /**
      * @inheritdoc
@@ -65,14 +68,14 @@ class BLoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return BIdentity|null
      */
     public function getUser()
     {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+        if ($this->user === false) {
+            $this->user = BIdentity::findByUsername($this->username);
         }
 
-        return $this->_user;
+        return $this->user;
     }
 }
