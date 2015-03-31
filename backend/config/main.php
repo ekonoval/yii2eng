@@ -1,4 +1,5 @@
 <?php
+use backend\ext\User\BIdentity;
 use backend\ext\User\BPhpAuthManager;
 use backend\ext\User\BWebUser;
 
@@ -14,16 +15,30 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'auth' => [
+            'class' => 'backend\modules\auth\Auth',
+        ],
+    ],
     'components' => [
         'user' => [
             'class' => BWebUser::className(),
-            'identityClass' => 'common\models\User',
+            //'identityClass' => 'common\models\User',
+            'identityClass' => BIdentity::className(),
             'enableAutoLogin' => true,
         ],
         'authManager' => [
             'class' => BPhpAuthManager::className(),
         ],
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => array(
+                '/auth/<a:\w+>' => 'auth/auth/<a>',
+            )
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
