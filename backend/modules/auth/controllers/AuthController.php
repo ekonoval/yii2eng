@@ -9,10 +9,6 @@ use yii\helpers\ArrayHelper;
 
 class AuthController extends BackendController
 {
-//    public function actionIndex()
-//    {
-//        return $this->render('index');
-//    }
 
     public function behaviors()
     {
@@ -25,13 +21,17 @@ class AuthController extends BackendController
                             'actions' => ['login'],
                             'allow' => true,
                             'roles' => ['?']
+                        ],
+                        [
+                            'actions' => ['logout'],
+                            'allow' => true,
+                            'roles' => ['@']
                         ]
                     ]
                 ]
             ]
         );
     }
-
 
     public function actionLogin()
     {
@@ -50,9 +50,16 @@ class AuthController extends BackendController
         }
     }
 
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+
     public function actionTest()
     {
-
         echo "<h2>Vasya   </h2>\n";
     }
+
 }
