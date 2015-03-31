@@ -22,11 +22,6 @@ class AuthController extends BackendController
                             'allow' => true,
                             'roles' => ['?']
                         ],
-                        [
-                            'actions' => ['logout'],
-                            'allow' => true,
-                            'roles' => ['@']
-                        ]
                     ]
                 ]
             ]
