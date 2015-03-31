@@ -11,4 +11,13 @@ class BUserRbac
     const ROLE_OPER = 4;
 
     //const ROLE_KASSA = 5;
+
+    static function getRolesList()
+    {
+        return array(
+            self::ROLE_OPER => 'operator',
+            self::ROLE_ADMIN => 'admin',
+            self::ROLE_ADMIN_SUPER => 'admin-super',
+        );
+    }
 }
