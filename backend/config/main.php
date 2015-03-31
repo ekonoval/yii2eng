@@ -14,7 +14,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'auth' => [
+            'class' => 'backend\modules\auth\Auth',
+        ],
+    ],
     'components' => [
         'user' => [
             'class' => BWebUser::className(),
@@ -24,6 +28,15 @@ return [
         'authManager' => [
             'class' => BPhpAuthManager::className(),
         ],
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => array(
+                '/auth/<a:\w+>' => 'auth/auth/<a>',
+            )
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

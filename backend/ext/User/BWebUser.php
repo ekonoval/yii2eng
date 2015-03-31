@@ -11,6 +11,8 @@ class BWebUser extends User
      */
     private $permissionsAlreadyApplied = false;
 
+    public $loginUrl = "auth/login";
+
     public function getIdentity($autoRenew = true)
     {
         $parentIdentity = parent::getIdentity($autoRenew);
