@@ -1,6 +1,7 @@
 <?php
 namespace backend\ext\System;
 
+use backend\ext\User\BUserRbac;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -19,7 +20,7 @@ class BackendController extends Controller
                         //'actions' => ['logout', 'index'],
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [BUserRbac::ROLE_ADMIN],
                     ],
                 ],
             ],

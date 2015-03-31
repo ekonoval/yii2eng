@@ -59,7 +59,7 @@ class AuthController extends BackendController
 
     public function actionTest()
     {
-        echo "<h2>Vasya   </h2>\n";
+        echo "<h2>auth test  </h2>\n";
     }
 
 }

@@ -15,6 +15,8 @@ class BWebUser extends User
 
     public function getIdentity($autoRenew = true)
     {
+
+        /** @var BIdentity $parentIdentity */
         $parentIdentity = parent::getIdentity($autoRenew);
 
         if (
@@ -33,6 +35,9 @@ class BWebUser extends User
             //$roleInt = UserRbac::ROLE_ADMIN;
             //$roleInt = UserRbac::ROLE_ADMIN_SUPER;
             $role = $authManager->createRole($roleInt);
+
+            $role = $authManager->createRole($parentIdentity->role);
+
             $authManager->assign($role, $parentIdentity->getId());
         }
 
