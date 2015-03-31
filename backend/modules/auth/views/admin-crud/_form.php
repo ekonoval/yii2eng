@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
 
+    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
+
 
 
     <div class="form-group">

@@ -7,10 +7,36 @@ use backend\models\BackUser;
 use backend\modules\auth\models\AdminCrud\AdminCrudSave;
 use backend\modules\auth\models\AdminCrud\AdminCrudSearch;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class AdminCrudController extends BackendController
 {
+//    public function behaviors()
+//    {
+//        $beh = ArrayHelper::merge(
+//            [
+//                'access' => [
+//                    'rules' => [
+//                        [
+//                            'actions' => [],
+//                            'allow' => false,
+//                            'roles' => [BUserRbac::ROLE_ADMIN]
+//                        ],
+////                        [
+////                            'allow' => true,
+////                            'roles' => [BUserRbac::ROLE_ADMIN_SUPER]
+////                        ],
+//
+//                    ]
+//                ]
+//            ],
+//            parent::behaviors()
+//        );
+//
+//        return $beh;
+//    }
+
     public function actionIndex()
     {
         $searchModel = new AdminCrudSearch();
@@ -36,8 +62,30 @@ class AdminCrudController extends BackendController
             //return $this->redirect(['view', 'id' => $model->id]);
             return $this->redirect(['index']);
         } else {
-pa($model->getErrors());
+            //pa($model->getErrors());
             return $this->render('create_tpl', [
+                'model' => $model,
+                'roles' => $roles,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Product model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $roles = BUserRbac::getRolesList();
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('update', [
                 'model' => $model,
                 'roles' => $roles,
             ]);
@@ -67,6 +115,7 @@ pa($model->getErrors());
     protected function findModel($id)
     {
         if (($model = AdminCrudSave::findOne($id)) !== null) {
+            $model->setEditScenario();
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
