@@ -43,10 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'created_at',
 //            [
-//                'attribute' => 'category_id',
-//                'value' => function ($model) {
-//                    return empty($model->category_id) ? '-' : $model->category->title;
-//                },
+//                'attribute' => 'created_at',
+//                'format' => ['date', 'php:Y-m-d']
 //            ],
 
             [
