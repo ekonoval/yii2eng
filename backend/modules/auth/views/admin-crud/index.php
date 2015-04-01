@@ -5,6 +5,7 @@ use backend\modules\auth\models\AdminCrud\AdminCrudSearch;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel AdminCrudSearch */
@@ -12,6 +13,7 @@ use yii\helpers\Url;
 
 $this->title = 'Admins-Crud';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="product-index">
@@ -22,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Product', ['create'], ['class' => 'btn-sm btn-success']) ?>
     </p>
 
-
+    <?php Pjax::begin(['id' => 'admin-crud-id']) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -61,5 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+    <? Pjax::end(); ?>
 
 </div>
