@@ -35,8 +35,8 @@ class AdminCrudSave extends BackUser
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'status', 'email'], 'required'],
-            [['status'], 'integer'],
+            [['username', 'auth_key', 'password_hash', 'status', 'role'], 'required'],
+            [['status', 'role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],

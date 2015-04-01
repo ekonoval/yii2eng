@@ -1,5 +1,6 @@
 <?php
 
+use backend\ext\User\BUserRbac;
 use backend\models\BackUser;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -16,9 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
 
+    <?= $form->field($model, 'role')->dropDownList(BUserRbac::getRolesList(), ['prompt' => '--select role--']) ?>
+
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
-
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',
