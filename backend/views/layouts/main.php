@@ -1,5 +1,6 @@
 <?php
 use backend\assets\AppAsset;
+use backend\ext\User\BUserRbac;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -37,8 +38,9 @@ AppAsset::register($this);
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/auth/login']];
             } else {
+                $roleName = BUserRbac::getRoleName(Yii::$app->user->identity->role);
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Logout (' . Yii::$app->user->identity->username . " - {$roleName}". ')',
                     'url' => ['/auth/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];

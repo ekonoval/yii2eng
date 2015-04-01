@@ -1,5 +1,6 @@
 <?php
 namespace backend\ext\User;
+use common\ext\System\AppException;
 
 /**
  * See @console/BackendRbacController/init for roles relations
@@ -19,5 +20,13 @@ class BUserRbac
             self::ROLE_ADMIN => 'admin',
             self::ROLE_ADMIN_SUPER => 'admin-super',
         );
+    }
+
+    static function getRoleName($roleInt)
+    {
+        $roles = self::getRolesList();
+        AppException::ensure(array_key_exists($roleInt, $roles), "Role '{$roleInt}' is not found ");
+
+        return $roles[$roleInt];
     }
 }
