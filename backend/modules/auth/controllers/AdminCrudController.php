@@ -7,35 +7,20 @@ use backend\models\BackUser;
 use backend\modules\auth\models\AdminCrud\AdminCrudSave;
 use backend\modules\auth\models\AdminCrud\AdminCrudSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class AdminCrudController extends BackendController
 {
-//    public function behaviors()
-//    {
-//        $beh = ArrayHelper::merge(
-//            [
-//                'access' => [
-//                    'rules' => [
-//                        [
-//                            'actions' => [],
-//                            'allow' => false,
-//                            'roles' => [BUserRbac::ROLE_ADMIN]
-//                        ],
-////                        [
-////                            'allow' => true,
-////                            'roles' => [BUserRbac::ROLE_ADMIN_SUPER]
-////                        ],
-//
-//                    ]
-//                ]
-//            ],
-//            parent::behaviors()
-//        );
-//
-//        return $beh;
-//    }
+    public function behaviors()
+    {
+        $parent = parent::behaviors();
+
+        //--- Only superAdmins are allowed ---//
+        $parent["access"]["rules"]["allowAdmins"]["roles"] = [BUserRbac::ROLE_ADMIN_SUPER];
+        return $parent;
+    }
 
     public function actionIndex()
     {

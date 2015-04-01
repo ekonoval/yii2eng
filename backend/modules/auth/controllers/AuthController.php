@@ -14,7 +14,6 @@ class AuthController extends BackendController
     public function behaviors()
     {
         return ArrayHelper::merge(
-            parent::behaviors(),
             [
                 'access' => [
                     'rules' => [
@@ -25,7 +24,8 @@ class AuthController extends BackendController
                         ],
                     ]
                 ]
-            ]
+            ],
+            parent::behaviors()
         );
     }
 
