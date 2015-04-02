@@ -17,6 +17,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
 
+    <?= $form->field($model, 'pwd')->passwordInput() ?>
+
     <?= $form->field($model, 'role')->dropDownList(BUserRbac::getRolesList(), ['prompt' => '--select role--']) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>

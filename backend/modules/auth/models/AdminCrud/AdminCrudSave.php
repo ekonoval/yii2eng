@@ -11,6 +11,8 @@ class AdminCrudSave extends BackUser
     const SCENARIO_EDIT = 1;
     const SCENARIO_CREATE = 2;
 
+    public $pwd;
+
     public function init()
     {
         parent::init();
@@ -35,7 +37,7 @@ class AdminCrudSave extends BackUser
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'status', 'role'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'status', 'role', 'pwd'], 'required'],
             [['status', 'role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
@@ -53,9 +55,9 @@ class AdminCrudSave extends BackUser
         if ($this->scenario == self::SCENARIO_CREATE) {
             $this->status = self::STATUS_ACTIVE;
             $this->generateAndSetAuthKey();
-
-            $this->setPasswordHash('1');
         }
+
+        $this->setPasswordHash($this->pwd);
 
         return $parentValidate;
     }
