@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\ext\Behaviors\MysqlTimestampBehavior;
+use common\ext\System\AppException;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -24,6 +25,19 @@ class BackUser extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
+
+    public static function statusesList()
+    {
+        return [
+            self::STATUS_ACTIVE => 'active',
+            self::STATUS_DELETED => 'deleted'
+        ];
+    }
+
+    public static function getStatusName($statusInt)
+    {
+        return self::statusesList()[$statusInt];
+    }
 
     /**
      * @inheritdoc

@@ -20,6 +20,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'pwd')->passwordInput() ?>
 
     <?= $form->field($model, 'role')->dropDownList(BUserRbac::getRolesList(), ['prompt' => '--select role--']) ?>
+    <?= $form->field($model, 'status')->dropDownList($model->statusesList(), ['prompt' => '--select status--']) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 

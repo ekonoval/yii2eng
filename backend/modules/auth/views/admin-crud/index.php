@@ -42,7 +42,14 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to('ind
                 },
                 'filter' => BUserRbac::getRolesList()
             ],
-            'status',
+            //'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) use ($searchModel) {
+                    return $searchModel::getStatusName($data->status);
+                },
+                'filter' => $searchModel::statusesList()
+            ],
             'created_at',
 //            [
 //                'attribute' => 'created_at',
