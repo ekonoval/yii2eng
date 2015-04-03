@@ -51,11 +51,18 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to('ind
                 },
                 'filter' => $searchModel::statusesList()
             ],
-            'created_at',
-//            [
-//                'attribute' => 'created_at',
-//                'format' => ['date', 'php:Y-m-d']
-//            ],
+            //'created_at',
+            [
+                'attribute' => 'created_at',
+                'value' => 'created_at',
+                'filter' => \yii\jui\DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'created_at',
+                    'language' => 'ru',
+                    'dateFormat' => 'dd-MM-yyyy',
+                ]),
+                'format' => 'html',
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',

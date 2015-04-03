@@ -55,8 +55,8 @@ class AdminCrudSearch extends BackUser
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username]);
-//            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'created_at', $this->created_at]);
 
         return $dataProvider;
     }
