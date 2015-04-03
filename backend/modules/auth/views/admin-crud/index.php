@@ -2,6 +2,7 @@
 
 use backend\ext\User\BUserRbac;
 use backend\modules\auth\models\AdminCrud\AdminCrudSearch;
+use common\ext\Helpers\DateHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -54,14 +55,22 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to('ind
             //'created_at',
             [
                 'attribute' => 'created_at',
-                'value' => 'created_at',
+                //'value' => 'created_at',
+                'value' => function ($data) {
+                    return DateHelper::getJqDatePickerFormatedDate($data->created_at, true);
+                },
                 'filter' => \yii\jui\DatePicker::widget([
                     'model' => $searchModel,
                     'attribute' => 'created_at',
-                    'language' => 'ru',
-                    'dateFormat' => 'dd-MM-yyyy',
+                    //'language' => 'en',
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                    ],
+                    //'dateFormat' => 'dd-MM-yyyy',
+                    'dateFormat' => 'php:'.DateHelper::FORMAT_JQ_DATE_PICKER_NO_TIME,
                 ]),
-                'format' => 'html',
+                //'format' => 'html',
             ],
 
             [

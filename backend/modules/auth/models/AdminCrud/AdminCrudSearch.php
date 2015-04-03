@@ -2,6 +2,7 @@
 namespace backend\modules\auth\models\AdminCrud;
 
 use backend\models\BackUser;
+use common\ext\Helpers\DateHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -55,8 +56,10 @@ class AdminCrudSearch extends BackUser
             'status' => $this->status,
         ]);
 
+        $createdAtMysql = DateHelper::convertJqDatePickerDate2MysqlDate($this->created_at, false);
+
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'created_at', $this->created_at]);
+            ->andFilterWhere(['like', 'created_at', $createdAtMysql]);
 
         return $dataProvider;
     }
