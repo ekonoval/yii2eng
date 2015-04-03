@@ -49,13 +49,13 @@ class AdminCrudSearch extends BackUser
             return $dataProvider;
         }
 
-//        $query->andFilterWhere([
-//            'id' => $this->id,
-//            'category_id' => $this->category_id,
-//            'price' => $this->price,
-//        ]);
-//
-//        $query->andFilterWhere(['like', 'title', $this->title])
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'role' => $this->role,
+            'status' => $this->status,
+        ]);
+
+        $query->andFilterWhere(['like', 'username', $this->username]);
 //            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
