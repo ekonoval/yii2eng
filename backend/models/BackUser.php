@@ -2,6 +2,8 @@
 
 namespace backend\models;
 
+use common\ext\Behaviors\MysqlTimestampBehavior;
+use common\ext\System\AppException;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -24,6 +26,19 @@ class BackUser extends \yii\db\ActiveRecord
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
 
+    public static function statusesList()
+    {
+        return [
+            self::STATUS_ACTIVE => 'active',
+            self::STATUS_DELETED => 'deleted'
+        ];
+    }
+
+    public static function getStatusName($statusInt)
+    {
+        return self::statusesList()[$statusInt];
+    }
+
     /**
      * @inheritdoc
      */
@@ -38,7 +53,7 @@ class BackUser extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            MysqlTimestampBehavior::className(),
         ];
     }
 
@@ -137,17 +152,17 @@ class BackUser extends \yii\db\ActiveRecord
     /**
      * Generates password hash from password and sets it to the model
      *
-     * @param string $password
+     * @param string $passwordPlain
      */
-    public function setPassword($password)
+    public function setPasswordHash($passwordPlain)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($passwordPlain);
     }
 
     /**
      * Generates "remember me" authentication key
      */
-    public function generateAuthKey()
+    public function generateAndSetAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
