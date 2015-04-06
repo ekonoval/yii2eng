@@ -11,6 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'apt' => [
+            'class' => 'frontend\modules\apt\AptModule',
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
