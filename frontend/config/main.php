@@ -12,6 +12,12 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'db' => [
+            //'dsn' => 'mysql:host=localhost;dbname=konvoke',
+            'on afterOpen' => function ($event) {
+                $event->sender->createCommand("SET time_zone = '+00:00'")->execute(); //!!!!!!
+            }
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
