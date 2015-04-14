@@ -19,6 +19,9 @@ return [
         'auth' => [
             'class' => 'backend\modules\auth\Auth',
         ],
+        'translate' => [
+            'class' => 'backend\modules\translate\TranslateMod',
+        ],
     ],
     'components' => [
         'user' => [

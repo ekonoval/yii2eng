@@ -3,6 +3,7 @@ namespace backend\ext\System;
 
 use backend\ext\User\BUserRbac;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class BackendController extends Controller
@@ -47,4 +48,32 @@ class BackendController extends Controller
             ],
         ];
     }
+
+    public function renderActionTpl($params = [])
+    {
+        $view = "{$this->action->id}_tpl";
+        return parent::render($view, $params);
+    }
+
+    public function getModuleUrl($action = null, $ctrl = null, $params = [], $module = null)
+    {
+        if (is_null($action)) {
+            $action = $this->action->id;
+        }
+
+        if (is_null($ctrl)) {
+            $ctrl = $this->id;
+        }
+
+        if (is_null($module)) {
+            $module = $this->module->id;
+        }
+
+        $path = "/{$module}/{$ctrl}/{$action}";
+        $res = [$path] + $params;
+
+        return Url::to($res);
+    }
+
+
 }
