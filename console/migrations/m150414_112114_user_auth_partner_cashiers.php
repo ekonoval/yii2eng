@@ -61,12 +61,12 @@ class m150414_112114_user_auth_partner_cashiers extends Migration
 
     public function safeDown()
     {
-        $this->execute("DROP TABLE `cashbox`");
-        $this->execute("DROP TABLE `partner`");
-        $this->execute("DROP TABLE `user_auth`");
-        //echo "m150414_112114_user_auth_partner_cashiers cannot be reverted.\n";
+        $this->dropTable('cashbox');
+        $this->dropTable('partner');
+        $this->dropTable('user_auth');
 
-        //return false;
+
+        return true;
     }
     
 }
