@@ -51,11 +51,12 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getMo
                 'attribute' => 'lnkEpisodes',
                 'value' => function($data) use ($ctrl){
                     return Html::a("[episodes]",
-                        $ctrl->getModuleUrl('index', 'episode', ['movieID' => $data->movieID])
+                        $ctrl->getModuleUrl('index', 'episode', ['movieID' => $data->movieID]),
+                        ['data-pjax' => 0]
                     );
                 },
                 'contentOptions' => ['style' => 'width: 100px; text-align:center;'],
-                'format' => 'html'
+                'format' => 'raw'
             ],
 
             [
