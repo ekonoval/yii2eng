@@ -31,11 +31,20 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to('ind
                 'class' => 'yii\grid\CheckboxColumn',
                 // you may configure additional properties here
             ],
-            'id',
+            //'id',
+            [
+                'attribute' => 'authId',
+                'value' => 'id'
+            ],
             'login',
             [
                 'attribute' => 'partnerName',
                 'value' => 'partners.name'
+            ],
+
+            [
+                'attribute' => 'partnerId',
+                'value' => 'partners.id'
             ],
 
 /*

@@ -11,6 +11,8 @@ use yii\db\ActiveRecord;
  */
 class PartnerSearch extends Model
 {
+    public $authId;
+    public $partnerId;
     public $login;
     public $partnerName;
 
@@ -20,7 +22,7 @@ class PartnerSearch extends Model
     public function rules()
     {
         return [
-            [['login', 'partnerName'], 'safe'],
+            [['authId', 'partnerId', 'login', 'partnerName'], 'safe'],
         ];
     }
 
