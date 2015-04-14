@@ -3,7 +3,7 @@ namespace backend\modules\translate\controllers;
 
 use backend\ext\System\BackendController;
 
-class EpisodesController extends BackendController
+class EpisodeController extends BackendController
 {
     public function actionIndex($movieID)
     {

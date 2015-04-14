@@ -11,9 +11,11 @@ use backend\ext\System\BackendController;
 /* @var $searchModel BMovieSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/** @var BackendController $ctrl */
+$ctrl = $this->context;
 
 $this->title = 'Movies';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to(Yii::$app->controller->action->id)];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getModuleUrl()];
 
 ?>
 
@@ -47,9 +49,9 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to(Yii:
 
             [
                 'attribute' => 'lnkEpisodes',
-                'value' => function($data){
+                'value' => function($data) use ($ctrl){
                     return Html::a("[episodes]",
-                        $this->context->getModuleUrl('index', 'episodes', ['movieID' => $data->movieID])
+                        $ctrl->getModuleUrl('index', 'episode', ['movieID' => $data->movieID])
                     );
                 },
                 'contentOptions' => ['style' => 'width: 100px; text-align:center;'],
