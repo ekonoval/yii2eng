@@ -63,6 +63,19 @@ class StsApi
         return $resReady;
     }
 
+    private function performPutRequest($cmdPath, $params)
+    {
+        $this->appendParamsWithAuthToken($params);
+
+        $cmdUrl = $this->createCmdUrl($cmdPath);
+        $curlPerformer = new CurlPerformer(CurlPerformer::METHOD_PUT);
+        $resRaw = $curlPerformer->fileGetContents($cmdUrl, $params);
+
+        $resReady = $this->decodeResponse($resRaw, $cmdPath);
+
+        return $resReady;
+    }
+
     public function auth()
     {
         //$cmdUrl = $this->createCmdUrl('account/authenticate');
@@ -115,6 +128,57 @@ class StsApi
     }
 
     public function getAvailability($params = array())
+    {
+        return $this->performGetRequest('availability', $params);
+    }
+
+    public function getTimezones()
+    {
+        return $this->performGetRequest('/tz/list');
+    }
+
+    private function jsonifiedDataParams($data)
+    {
+        return array(
+            'data' => json_encode($data)
+        );
+
+    }
+
+    public function employeeCreate($data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+
+        return $this->performPostRequest('/employee', $params);
+    }
+
+    public function employeeEdit($employeeID, $data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+
+        return $this->performPutRequest('/employee/'.$employeeID, $params);
+    }
+
+    public function locationCreate($data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+
+        return $this->performPostRequest('/location', $params);
+    }
+
+    public function locationEdit($locationID, $data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+
+        return $this->performPutRequest('/location/'.$locationID, $params);
+    }
+
+    public function locationsGet()
+    {
+        return $this->performGetRequest('/location/');
+    }
+
+    public function availabilityGet($params)
     {
         return $this->performGetRequest('availability', $params);
     }

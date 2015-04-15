@@ -26,6 +26,10 @@ class CurlPerformer
             //curl_setopt($curl_handler, CURLOPT_POSTFIELDS, "postvar1=value1&postvar2=value2&postvar3=value3");
             $paramsStr = http_build_query($params);
             curl_setopt($curl_handler, CURLOPT_POSTFIELDS, $paramsStr);
+        } elseif ($this->method == self::METHOD_PUT) {
+            curl_setopt($curl_handler, CURLOPT_CUSTOMREQUEST, "PUT");
+            $paramsStr = http_build_query($params);
+            curl_setopt($curl_handler, CURLOPT_POSTFIELDS, $paramsStr);
         }
 
         $response = curl_exec($curl_handler);
