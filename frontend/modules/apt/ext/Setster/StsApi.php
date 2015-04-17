@@ -244,4 +244,12 @@ class StsApi
     {
         return $this->performDeleteRequest("appointment/{$aptID}", array('id' => $aptID, 'token' => $this->apiKey));
     }
+
+    public function availabilityUpdate($employeeID, $availabilitiesArray)
+    {
+        $params = array(
+            'availabilities' => json_encode($availabilitiesArray)
+        );
+        return $this->performPutRequest("employee/{$employeeID}/assignavailability", $params);
+    }
 }

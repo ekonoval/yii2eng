@@ -15,6 +15,16 @@ class EmployeeAction extends Action
     {
         $apiObj = $this->controller->apiObj;
 
+        $empID = 19294;
+
+        $empData = array(
+            'job' => 'fake',
+            'can_login' => false,
+            'password' => 'risking1'
+        );
+
+        $res = $apiObj->employeeEdit($empID, $empData); pa($res); exit;
+
         $res = $apiObj->employeeGet(19294);
 
         pa($res);
