@@ -2,6 +2,7 @@
 namespace frontend\modules\apt\controllers;
 
 use frontend\modules\apt\ext\Setster\StsApi;
+use Yii;
 use yii\base\Controller;
 
 class SetsterApiController extends Controller
@@ -21,7 +22,14 @@ class SetsterApiController extends Controller
     {
         parent::init();
         $apiObj = new StsApi();
-        $apiObj->createAndSetAuthToken();
+        $session = Yii::$app->session;
+
+        //$newToken = $apiObj->createAndSetAuthToken(); $session->set('setster_auth', $newToken);
+
+        $token = '2ncu523rlnu8ojfsng7afkgbj6';
+        $token = $session->get('setster_auth');
+
+        $apiObj->setAuthToken($token);
         $this->apiObj = $apiObj;
     }
 
@@ -56,14 +64,14 @@ class SetsterApiController extends Controller
         //pa($tz);
     }
 
-    private function employeeCreate()
+    function actionEmployeeCreate()
     {
         $apiObj = $this->apiObj;
         $empDataUpd = [
             'status' => 1,
             'nickname' => 'apiprov1'
         ];
-        $apiObj->employeeEdit(19294, $empDataUpd);exit;
+        $res = $apiObj->employeeEdit(19294, $empDataUpd); pa($res); exit;
 
         //pa($apiObj->getEmployees()); exit;
 
@@ -180,8 +188,16 @@ class SetsterApiController extends Controller
     {
         $apiObj = $this->apiObj;
 
-        $res = $apiObj->appointmentsList();
-        pa($res);exit;
+        $aptID = 5794890659;
+        $res = $apiObj->appointmentDelete($aptID);
+        pa($res);//exit;
+
+        $list = $apiObj->appointmentsList();
+        foreach ($list["data"] as $val) {
+            $id = $val["id"];
+            //$res = $apiObj->appointmentDelete($id);pa($res);
+        }
+        pa($list);exit;
 
         $aptData = array(
             "employee_id" => $this->employeeID,
@@ -199,5 +215,17 @@ class SetsterApiController extends Controller
         $res = $apiObj->appointmentCreate($aptData);
         pa($res);
 
+    }
+
+    public function actionClients()
+    {
+        $apiObj = $this->apiObj;
+
+        $clientID = 534636;
+
+        $res = $apiObj->clientDelete($clientID); pa($res);exit;
+
+        $res = $apiObj->clientsGet();
+        pa($res);
     }
 }

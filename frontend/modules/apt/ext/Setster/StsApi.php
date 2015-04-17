@@ -27,7 +27,7 @@ class StsApi
     private function decodeResponse($responseRaw, $cmdPath)
     {
         $decodedRes = json_decode($responseRaw, true);
-        $this->ensure(!empty($decodedRes), "Something wrong with api result for cmd '{$cmdPath}'");
+        $this->ensure(!empty($decodedRes), "Fail to decode api result of cmd '{$cmdPath}'");
         return $decodedRes;
     }
 
@@ -40,35 +40,56 @@ class StsApi
 
     private function performGetRequest($cmdPath, $params = array())
     {
+        return $this->performGetLikeRequest(CurlPerformer::METHOD_GET, $cmdPath, $params);
+    }
+
+    private function performPostRequest($cmdPath, $params)
+    {
+        return $this->performNonGetLikeRequest(CurlPerformer::METHOD_POST, $cmdPath, $params);
+    }
+
+    private function performPutRequest($cmdPath, $params)
+    {
+        return $this->performNonGetLikeRequest(CurlPerformer::METHOD_PUT, $cmdPath, $params);
+    }
+
+    private function performDeleteRequest($cmdPath, $params = array())
+    {
+        return $this->performGetLikeRequest(CurlPerformer::METHOD_DELETE, $cmdPath, $params);
+    }
+
+    /**
+     * GET and DELETE
+     * @param $verb
+     * @param $cmdPath
+     * @param array $params
+     * @return mixed
+     */
+    private function performGetLikeRequest($verb, $cmdPath, $params = array())
+    {
         $this->appendParamsWithAuthToken($params);
 
         $cmdUrl = $this->createCmdUrl($cmdPath, $params);
-        $curlPerformer = new CurlPerformer(CurlPerformer::METHOD_GET);
+        $curlPerformer = new CurlPerformer($verb);
         $resRaw = $curlPerformer->fileGetContents($cmdUrl);
 
         $resReady = $this->decodeResponse($resRaw, $cmdPath);
         return $resReady;
     }
 
-    private function performPostRequest($cmdPath, $params)
+    /**
+     * POST and PUT
+     * @param $verb
+     * @param $cmdPath
+     * @param $params
+     * @return mixed
+     */
+    private function performNonGetLikeRequest($verb, $cmdPath, $params)
     {
         $this->appendParamsWithAuthToken($params);
 
         $cmdUrl = $this->createCmdUrl($cmdPath);
-        $curlPerformer = new CurlPerformer(CurlPerformer::METHOD_POST);
-        $resRaw = $curlPerformer->fileGetContents($cmdUrl, $params);
-
-        $resReady = $this->decodeResponse($resRaw, $cmdPath);
-
-        return $resReady;
-    }
-
-    private function performPutRequest($cmdPath, $params)
-    {
-        $this->appendParamsWithAuthToken($params);
-
-        $cmdUrl = $this->createCmdUrl($cmdPath);
-        $curlPerformer = new CurlPerformer(CurlPerformer::METHOD_PUT);
+        $curlPerformer = new CurlPerformer($verb);
         $resRaw = $curlPerformer->fileGetContents($cmdUrl, $params);
 
         $resReady = $this->decodeResponse($resRaw, $cmdPath);
@@ -78,7 +99,6 @@ class StsApi
 
     public function auth()
     {
-        //$cmdUrl = $this->createCmdUrl('account/authenticate');
         $res = $this->performPostRequest('account/authenticate',
             array(
                 'email' => 'ekonoval@gmail.com',
@@ -95,9 +115,15 @@ class StsApi
         return $res["data"]["session_token"];
     }
 
+    public function setAuthToken($token)
+    {
+        $this->authToken = $token;
+    }
+
     public function createAndSetAuthToken()
     {
         $this->authToken = $this->auth();
+        return $this->authToken;
     }
 
     public function getServices()
@@ -122,9 +148,19 @@ class StsApi
         return $this->performGetRequest('employee');
     }
 
-    public function getClients()
+    public function clientsGet()
     {
         return $this->performGetRequest('client');
+    }
+
+    public function clientDelete($clientID)
+    {
+        $params = array(
+            'id' => $clientID,
+            'session_token' => $this->authToken
+        );
+
+        return $this->performDeleteRequest("client/{$clientID}", $params);
     }
 
     public function getTimezones()
@@ -187,5 +223,10 @@ class StsApi
     {
         $params = array();
         return $this->performGetRequest('appointment');
+    }
+
+    public function appointmentDelete($aptID)
+    {
+        return $this->performDeleteRequest("appointment/{$aptID}", array('id' => $aptID, 'token' => $this->apiKey));
     }
 }
