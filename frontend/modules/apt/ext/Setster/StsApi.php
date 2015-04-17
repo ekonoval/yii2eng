@@ -31,6 +31,15 @@ class StsApi
         return $decodedRes;
     }
 
+    private function appendCmdWithId($cmdName, $id)
+    {
+        if (!is_null($id)) {
+            $cmdName = trim($cmdName, '/');
+            $cmdName .= "/{$id}";
+        }
+        return $cmdName;
+    }
+
     private function appendParamsWithAuthToken(&$params)
     {
         if (!empty($this->authToken)) {
@@ -143,9 +152,9 @@ class StsApi
         return $this->performGetRequest('account/companies');
     }
 
-    public function getEmployees()
+    public function employeeGet($id = null)
     {
-        return $this->performGetRequest('employee');
+        return $this->performGetRequest($this->appendCmdWithId('employee', $id));
     }
 
     public function clientsGet()
@@ -217,6 +226,12 @@ class StsApi
     {
         $params = $this->jsonifiedDataParams($data);
         return $this->performPostRequest('/appointment', $params);
+    }
+
+    public function appointmentEdit($id, $data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+        return $this->performPutRequest('/appointment/'.$id, $params);
     }
 
     public function appointmentsList()

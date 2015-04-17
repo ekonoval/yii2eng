@@ -1,6 +1,7 @@
 <?php
 namespace frontend\modules\apt\controllers;
 
+use frontend\modules\apt\controllers\SetsterApi\EmployeeAction;
 use frontend\modules\apt\ext\Setster\StsApi;
 use Yii;
 use yii\base\Controller;
@@ -16,7 +17,14 @@ class SetsterApiController extends Controller
     /**
      * @var StsApi
      */
-    private $apiObj;
+    public $apiObj;
+
+    public function actions()
+    {
+        return [
+            'employee' => EmployeeAction::className()
+        ];
+    }
 
     public function init()
     {
@@ -44,7 +52,7 @@ class SetsterApiController extends Controller
         //$accountInfo = $apiObj->getAccountInfo();
         //$subAcc = $apiObj->getSubAccounts();
 
-        $employees = $apiObj->getEmployees(); pa($employees); exit;
+        $employees = $apiObj->employeeGet(); pa($employees); exit;
 
         //$clients = $apiObj->getClients();
 
@@ -187,24 +195,20 @@ class SetsterApiController extends Controller
     public function actionAppointment()
     {
         $apiObj = $this->apiObj;
+        $res = null;
 
+        //--- delete ---//
         $aptID = 5794890659;
-        $res = $apiObj->appointmentDelete($aptID);
-        pa($res);//exit;
+        //$res = $apiObj->appointmentDelete($aptID); pa($res);//exit;
 
-        $list = $apiObj->appointmentsList();
-        foreach ($list["data"] as $val) {
-            $id = $val["id"];
-            //$res = $apiObj->appointmentDelete($id);pa($res);
-        }
-        pa($list);exit;
-
+        //#------------------- create -------------------#//
         $aptData = array(
             "employee_id" => $this->employeeID,
             "location_id" => $this->locationID,
             "service_id" => $this->serviceID,
-            "start_date" => "2015-05-14 09:16:27",
+            "start_date" => "2015-05-14 09:46:27",
             "note" => "This is a test. " . "[".time()."]",
+            'status' => 10,
 
             "client_email" => 'ekonoval@gmail.com',
             "client_name" => '1fake EK '.uniqid(),
@@ -212,8 +216,22 @@ class SetsterApiController extends Controller
 //            "client_email" => 'quadroval@gmail.com',
 //            "client_name" => 'quadrovalAPI',
         );
-        $res = $apiObj->appointmentCreate($aptData);
-        pa($res);
+        //$res = $apiObj->appointmentCreate($aptData);pa($res);
+
+        //#------------------- edit -------------------#//
+        $aptData = array(
+            'status' => 10,
+            "note" => "This is a test. fake2222"
+        );
+        $res = $apiObj->appointmentEdit(5917464746, $aptData); pa($res);
+
+        //--- apt list ---//
+        $list = $apiObj->appointmentsList();
+        foreach ($list["data"] as $val) {
+            $id = $val["id"];
+            //$res = $apiObj->appointmentDelete($id);pa($res);
+        }
+        pa($list);exit;
 
     }
 
