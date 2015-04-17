@@ -175,4 +175,29 @@ class SetsterApiController extends Controller
 
         pa($avail);
     }
+
+    public function actionAppointment()
+    {
+        $apiObj = $this->apiObj;
+
+        $res = $apiObj->appointmentsList();
+        pa($res);exit;
+
+        $aptData = array(
+            "employee_id" => $this->employeeID,
+            "location_id" => $this->locationID,
+            "service_id" => $this->serviceID,
+            "start_date" => "2015-05-14 09:16:27",
+            "note" => "This is a test. " . "[".time()."]",
+
+            "client_email" => 'ekonoval@gmail.com',
+            "client_name" => '1fake EK '.uniqid(),
+
+//            "client_email" => 'quadroval@gmail.com',
+//            "client_name" => 'quadrovalAPI',
+        );
+        $res = $apiObj->appointmentCreate($aptData);
+        pa($res);
+
+    }
 }

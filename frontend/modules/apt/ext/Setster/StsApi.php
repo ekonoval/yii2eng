@@ -127,11 +127,6 @@ class StsApi
         return $this->performGetRequest('client');
     }
 
-    public function getAvailability($params = array())
-    {
-        return $this->performGetRequest('availability', $params);
-    }
-
     public function getTimezones()
     {
         return $this->performGetRequest('/tz/list');
@@ -142,7 +137,6 @@ class StsApi
         return array(
             'data' => json_encode($data)
         );
-
     }
 
     public function employeeCreate($data)
@@ -181,5 +175,17 @@ class StsApi
     public function availabilityGet($params)
     {
         return $this->performGetRequest('availability', $params);
+    }
+
+    public function appointmentCreate($data)
+    {
+        $params = $this->jsonifiedDataParams($data);
+        return $this->performPostRequest('/appointment', $params);
+    }
+
+    public function appointmentsList()
+    {
+        $params = array();
+        return $this->performGetRequest('appointment');
     }
 }
