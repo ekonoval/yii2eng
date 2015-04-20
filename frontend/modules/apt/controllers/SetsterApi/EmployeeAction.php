@@ -5,10 +5,7 @@ use frontend\modules\apt\controllers\SetsterApiController;
 use yii\base\Action;
 use yii\web\Response;
 
-/**
- * @property SetsterApiController $controller
- */
-class EmployeeAction extends Action
+class EmployeeAction extends SetsterAction
 {
 
     public function run()
@@ -16,14 +13,28 @@ class EmployeeAction extends Action
         $apiObj = $this->controller->apiObj;
 
         $empID = 19294;
+        $location4 = 20841;
 
-        $empData = array(
-            'job' => 'fake',
-            'can_login' => false,
-            'password' => 'risking1'
+        //$apiObj->createAndSetAuthToken();
+
+        $links = array(
+            $this->locationID => [$this->serviceID => 1],
+            $location4 => [$this->serviceID => 1],
         );
 
-        $res = $apiObj->employeeEdit($empID, $empData); pa($res); exit;
+        //$links = array('location_links' => $links);
+        //$links = json_encode($links);
+        //pa($links);
+
+        $empData = array(
+            'job' => 'fake2',
+            'can_login' => true,
+            //'password' => 'risking1',
+            'links' => $links,
+        );
+        pa($empData);
+
+        $res = $apiObj->employeeEdit($empID, $empData); pa($res); //exit;
 
         $res = $apiObj->employeeGet(19294);
 

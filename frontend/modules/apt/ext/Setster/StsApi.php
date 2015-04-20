@@ -184,6 +184,17 @@ class StsApi
         );
     }
 
+    private function jsonifiedFilterParams($filter)
+    {
+        if (empty($filter)) {
+            return array();
+        }
+
+        return array(
+            'filter' => json_encode($filter)
+        );
+    }
+
     public function employeeCreate($data)
     {
         $params = $this->jsonifiedDataParams($data);
@@ -234,10 +245,11 @@ class StsApi
         return $this->performPutRequest('/appointment/'.$id, $params);
     }
 
-    public function appointmentsList()
+    public function appointmentsList($filter = array())
     {
-        $params = array();
-        return $this->performGetRequest('appointment');
+        $params = $this->jsonifiedFilterParams($filter);
+
+        return $this->performGetRequest('appointment', $params);
     }
 
     public function appointmentDelete($aptID)
