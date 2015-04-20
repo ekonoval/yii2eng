@@ -1,19 +1,24 @@
 <?php
-namespace backend\modules\translate\models\Movie;
+namespace backend\modules\translate\models\Episode;
 
-use common\models\Translate\TrMovie;
+use common\models\Translate\TrEpisode;
 use yii\data\ActiveDataProvider;
 
-class BMovieSearch extends TrMovie
+class BEpisodeSearch extends TrEpisode
 {
-    public $lnkEpisodes;
+    public $lnkWords;
 
-    public function rules()
+    public function setMovieID($movieID)
     {
-        return [
-            [['movieName'], 'safe']
-        ];
+        $this->movieID = intval($movieID);
     }
+
+//    public function rules()
+//    {
+//        $rules = parent::rules();
+//        $rules[] = [['lnkSearch'], 'safe'];
+//    }
+
 
     /**
      * Creates data provider instance with search query applied
@@ -28,8 +33,9 @@ class BMovieSearch extends TrMovie
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_ASC]],
             'pagination' => [
-                //'pageSize' => 1
+                'pageSize' => 10
             ]
         ]);
 
@@ -37,15 +43,14 @@ class BMovieSearch extends TrMovie
             return $dataProvider;
         }
 
-//        $query->andFilterWhere([
-//            'id' => $this->id,
-//            'role' => $this->role,
-//            'status' => $this->status,
-//        ]);
+        $query->andFilterWhere([
+            'seasonNum' => $this->seasonNum,
+            'episodeNum' => $this->episodeNum,
+        ]);
 
 //        $createdAtMysql = DateHelper::convertJqDatePickerDate2MysqlDate($this->created_at, false);
-//
-        $query->andFilterWhere(['like', 'movieName', $this->movieName]);
+
+//        $query->andFilterWhere(['like', 'movieName', $this->movieName]);
 //            ->andFilterWhere(['like', 'created_at', $createdAtMysql]);
 
         return $dataProvider;

@@ -3,6 +3,8 @@
 namespace common\models\Translate;
 
 use Yii;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tr_episodes".
@@ -48,5 +50,36 @@ class TrEpisode extends \yii\db\ActiveRecord
     public function getWords()
     {
         $this->hasMany(TrWord::className(), ['episodeID']);
+    }
+
+    public function getSeasonNumList()
+    {
+//        $sql = "
+//            SELECT DISTINCT seasonNum
+//            FROM ".self::tableName()."
+//            WHERE
+//                1
+//        ";
+//
+//        $res = self::findBySql($sql)
+//            ->asArray()
+//            ->all();
+
+        $res = self::find()
+            ->select('seasonNum')
+            ->distinct()
+            ->orderBy(['seasonNum' => SORT_DESC])
+            ->asArray()->all()
+        ;
+
+        return $res;
+    }
+
+    public function getSeasonNumOptions()
+    {
+        $seasons = $this->getSeasonNumList();
+        $options = ArrayHelper::map($seasons, 'seasonNum', 'seasonNum');
+
+        return $options;
     }
 }

@@ -1,13 +1,24 @@
 <?php
 namespace backend\modules\translate\controllers;
 
-use backend\ext\System\BackendController;
+use backend\modules\translate\models\Episode\BEpisodeSearch;
+use Yii;
 
-class EpisodeController extends BackendController
+class EpisodeController extends TranslateController
 {
-    public function actionIndex($movieID)
+    public function actionIndex($movieID = null)
     {
-        pa($movieID);
-        pa('eps');
+        $searchModel = new BEpisodeSearch();
+        $searchModel->setMovieID($movieID);
+        //$dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        $filterUrl = $this->createEpisodesIndexUrl($movieID);
+
+        return $this->renderActionTpl([
+            'filterUrl' => $filterUrl,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
     }
 }

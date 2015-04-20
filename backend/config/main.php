@@ -39,6 +39,8 @@ return [
             'showScriptName' => false,
             'rules' => array(
                 '/auth/<a:\w+>' => 'auth/auth/<a>',
+                '/translate/episode/index/movieID/<movieID:\d+>' => 'translate/episode/index',
+
             )
         ],
 
