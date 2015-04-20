@@ -2,6 +2,7 @@
 namespace frontend\modules\apt\controllers;
 
 use frontend\modules\apt\controllers\SetsterApi\AppointmentAction;
+use frontend\modules\apt\controllers\SetsterApi\AvailabilityAction;
 use frontend\modules\apt\controllers\SetsterApi\EmployeeAction;
 use frontend\modules\apt\ext\Setster\StsApi;
 use Yii;
@@ -27,6 +28,7 @@ class SetsterApiController extends Controller
         return [
             'employee' => EmployeeAction::className(),
             'appointment' => AppointmentAction::className(),
+            'availability' => AvailabilityAction::className(),
         ];
     }
 
@@ -128,63 +130,6 @@ class SetsterApiController extends Controller
         $this->location();
 
         //pa($res);
-    }
-
-    public function actionAvailability()
-    {
-        $apiObj = $this->apiObj;
-        //pa(date('Y-m-d'));exit;
-
-        //$tz = $apiObj->getTimezones();var_export($tz);exit;
-
-        $locationID = $this->locationID;
-        $locationID = $this->location4;
-
-        $res = array();
-        for($day = 13; $day <= 26; $day++ ){
-            $startDate = "2015-05-{$day}";
-
-            $params = array(
-                'service_id' => 38271,
-                'location_id' => $this->location4,
-                'provider_id' => '19294',
-                //'start_date' => date('Y-m-d'),
-                'start_date' => $startDate,
-                //'start_date' => '2015-04-17',
-
-                't' => 'weekly',
-                //'t' => 'daily',
-
-                'return' => 'times',
-                //'timezone_id' => $this->timezoneID,
-                //'timezone_id' => 552,
-                //'timezone_id' => 546,
-            );
-
-            //$res[] = $apiObj->availabilityGet($params);
-        }
-        //pa($res);exit;
-
-        $params = array(
-            'service_id' => $this->serviceID,
-            'location_id' => $locationID,
-            'provider_id' => '19294',
-            'start_date' => date('Y-m-d'),
-            'start_date' => '2015-05-12',
-            't' => 'weekly',
-            //'t' => 'daily',
-            'return' => 'times',
-            //'timezone_id' => $this->timezoneID,
-//            'timezone_id' => 552, // -6 MDT
-//            'timezone_id' => 164, // -2
-//            'timezone_id' => 306, // 0
-//            'timezone_id' => 422, // +1
-//            'timezone_id' => 320, // +10
-//            'timezone_id' => 414, // +3
-        );
-        $avail = $apiObj->availabilityGet($params);
-
-        pa($avail);
     }
 
     public function actionClients()

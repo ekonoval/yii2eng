@@ -152,11 +152,6 @@ class StsApi
         return $this->performGetRequest('account/companies');
     }
 
-    public function employeeGet($id = null)
-    {
-        return $this->performGetRequest($this->appendCmdWithId('employee', $id));
-    }
-
     public function clientsGet()
     {
         return $this->performGetRequest('client');
@@ -195,6 +190,13 @@ class StsApi
         );
     }
 
+    //#------------------- EMPLOYEE -------------------#//
+
+    public function employeeGet($id = null)
+    {
+        return $this->performGetRequest($this->appendCmdWithId('employee', $id));
+    }
+
     public function employeeCreate($data)
     {
         $params = $this->jsonifiedDataParams($data);
@@ -208,6 +210,13 @@ class StsApi
 
         return $this->performPutRequest('/employee/'.$employeeID, $params);
     }
+
+    public function employeeAvailabilityGet($employeeID)
+    {
+        return $this->performGetRequest('employee/getavailabilitytime/'.$employeeID);
+    }
+
+    //#------------------- LOCATION -------------------#//
 
     public function locationCreate($data)
     {
@@ -226,11 +235,6 @@ class StsApi
     public function locationsGet()
     {
         return $this->performGetRequest('/location/');
-    }
-
-    public function availabilityGet($params)
-    {
-        return $this->performGetRequest('availability', $params);
     }
 
     public function appointmentCreate($data)
@@ -255,6 +259,29 @@ class StsApi
     public function appointmentDelete($aptID)
     {
         return $this->performDeleteRequest("appointment/{$aptID}", array('id' => $aptID, 'token' => $this->apiKey));
+    }
+
+    //#------------------- AVAILABILITY -------------------#//
+
+    /**
+     * $params = array(
+         'service_id' => $this->serviceID,
+         'location_id' => $locationID,
+         'provider_id' => $this->employeeID,
+         'start_date' => date('Y-m-d'),
+         'start_date' => '2015-05-12',
+         't' => 'weekly',
+         //'t' => 'daily',
+         'return' => 'times',
+         //'timezone_id' => $this->timezoneID,
+      )
+     *
+     * @param $params
+     * @return mixed
+     */
+    public function availabilityGet($params)
+    {
+        return $this->performGetRequest('availability', $params);
     }
 
     public function availabilityUpdate($employeeID, $availabilitiesArray)
