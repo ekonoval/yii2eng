@@ -40,6 +40,7 @@ return [
             'rules' => array(
                 '/auth/<a:\w+>' => 'auth/auth/<a>',
                 '/translate/episode/index/movieID/<movieID:\d+>' => 'translate/episode/index',
+                '/translate/word/index/episodeID/<episodeID:\d+>' => 'translate/word/index',
 
             )
         ],

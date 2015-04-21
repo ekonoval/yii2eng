@@ -9,4 +9,9 @@ abstract class TranslateController extends BackendController
     {
         return $this->getModuleUrl('index', 'episode', ['movieID' => $movieID]);
     }
+
+    public function createWordsListUrl($episodeID)
+    {
+        return $this->getModuleUrl('index', 'word', ['episodeID' => $episodeID]);
+    }
 }

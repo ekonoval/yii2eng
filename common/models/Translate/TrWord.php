@@ -31,7 +31,7 @@ class TrWord extends \yii\db\ActiveRecord
     {
         return [
             [['episodeID', 'isHard', 'superHard'], 'integer'],
-            [['wordEN', 'wordRU'], 'required'],
+            'required' => [['wordEN', 'wordRU'], 'required'],
             [['wordEN', 'wordRU'], 'string', 'max' => 255]
         ];
     }
