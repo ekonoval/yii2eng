@@ -9,6 +9,23 @@ use yii\web\Controller;
 class BackendController extends Controller
 {
     /**
+     * Breadcrumps
+     * @var array
+     */
+    protected $bc;
+
+    public function addBreadcrump($label, $url, $key = null)
+    {
+        $item = ['label' => $label, 'url' => $url];
+
+        if (!is_null($key)) {
+            $this->bc[$key] = $item;
+        } else {
+            $this->bc[] = $item;
+        }
+    }
+
+    /**
      * @inheritdoc
      */
     public function behaviors()
