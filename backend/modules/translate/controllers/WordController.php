@@ -3,19 +3,20 @@ namespace backend\modules\translate\controllers;
 
 use backend\modules\translate\models\Word\BWordSearch;
 use common\models\Translate\TrEpisode;
-use common\models\Translate\TrMovie;
 use Yii;
-use yii\db\ActiveQuery;
 
 class WordController extends TranslateController
 {
+    /**
+     * @var TrEpisode
+     */
+    public $episodeCurrent;
+
     protected function breadcrumps()
     {
         parent::breadcrumps();
 
-        //$this->bcMovieEpisodes();
         $episodeID = yR()->get('episodeID');
-        pa($episodeID);
 
         if ($episodeID > 0) {
             /** @var TrEpisode $episode */
@@ -26,16 +27,21 @@ class WordController extends TranslateController
             ;
 
             if (!empty($episode)) {
+                $this->episodeCurrent = $episode;
                 $this->bcMovieEpisodes($episode->movieID);
 
                 $this->addBreadcrump(
-                    "S{$episode->seasonNum}-E{$episode->episodeNum}",
+                    $this->composeEpisodePlusSeasonString($episode),
                     $this->composeModuleUrl(null, 'word', ['episodeID' => $episodeID])
                 );
             }
         }
     }
 
+    public function composeEpisodePlusSeasonString(TrEpisode $episode)
+    {
+        return "S{$episode->seasonNum}-E{$episode->episodeNum}";
+    }
 
     public function actionIndex($episodeID)
     {
@@ -47,6 +53,7 @@ class WordController extends TranslateController
         $filterUrl = $this->createWordsListUrl($episodeID);
 
         return $this->renderActionTpl([
+            'title' => $this->composeEpisodePlusSeasonString($this->episodeCurrent),
             'filterUrl' => $filterUrl,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel

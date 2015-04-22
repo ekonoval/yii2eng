@@ -1,4 +1,5 @@
 <?php
+use backend\ext\Grid\BGridPjaxWidget;
 use backend\ext\System\BPjax;
 use backend\modules\translate\controllers\TranslateController;
 use backend\modules\translate\models\Word\BWordSearch;
@@ -13,22 +14,19 @@ use yii\helpers\Html;
 /** @var TranslateController $ctrl */
 $ctrl = $this->context;
 
-$this->title = 'Episodes';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $filterUrl];
+$this->title = 'Words for episode '.$title;
 
 ?>
 
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <?php BPjax::begin();  ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'filterUrl' => $filterUrl,
-        'layout' => '{pager}{items}{pager}',
-        'columns' => [
+    <?php
+    $pjaxGrid = new BGridPjaxWidget(
+        $searchModel,
+        $dataProvider,
+        [
             [
                 'class' => 'yii\grid\CheckboxColumn',
             ],
@@ -41,8 +39,6 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $filterUrl];
             'wordEN',
             'wordRU',
 
-//            'isHard',
-//            'superHard',
             [
                 'attribute' => 'isHard',
                 'class' => BooleanColumn::className()
@@ -57,8 +53,9 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $filterUrl];
                 'template' => '{update}{delete}',
             ],
         ],
-    ]); ?>
-
-    <?php BPjax::end(); ?>
+        $filterUrl
+    );
+    $pjaxGrid->run();
+    ?>
 
 </div>
