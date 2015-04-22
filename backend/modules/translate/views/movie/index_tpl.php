@@ -1,4 +1,5 @@
 <?php
+use backend\ext\Grid\BGridPjaxWidget;
 use backend\ext\System\BPjax;
 use backend\modules\translate\models\Movie\BMovieSearch;
 use common\ext\Helpers\DateHelper;
@@ -27,11 +28,11 @@ $this->title = 'Movies';
     </p>
     <? */ ?>
 
-    <?php BPjax::begin() ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+    <?php
+    $pjaxGrid = new BGridPjaxWidget(
+        $searchModel,
+        $dataProvider,
+        [
             [
                 'class' => 'yii\grid\CheckboxColumn',
             ],
@@ -61,9 +62,9 @@ $this->title = 'Movies';
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update}',
             ],
-        ],
-    ]); ?>
-
-    <?php BPjax::end(); ?>
+        ]
+    );
+    $pjaxGrid->run();
+    ?>
 
 </div>

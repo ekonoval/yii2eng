@@ -1,4 +1,5 @@
 <?php
+use backend\ext\Grid\BGridPjaxWidget;
 use backend\ext\System\BPjax;
 use backend\modules\translate\models\Episode\BEpisodeSearch;
 use backend\modules\translate\models\Movie\BMovieSearch;
@@ -23,12 +24,11 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->compo
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php BPjax::begin();  ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'filterUrl' => $filterUrl,
-        'columns' => [
+    <?php
+    $pjaxGrid = new BGridPjaxWidget(
+        $searchModel,
+        $dataProvider,
+        [
             [
                 'class' => 'yii\grid\CheckboxColumn',
             ],
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->compo
 
             [
                 'attribute' => 'lnkWords',
-                'value' => function($data) use ($ctrl){
+                'value' => function ($data) use ($ctrl) {
                     return Html::a("[words]",
                         $ctrl->composeModuleUrl('index', 'word', ['episodeID' => $data->episodeID]),
                         ['data-pjax' => 0]
@@ -51,14 +51,9 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->compo
                 'contentOptions' => ['style' => 'width: 100px; text-align:center;'],
                 'format' => 'raw'
             ],
-
-//            [
-//                'class' => 'yii\grid\ActionColumn',
-//                'template' => '{update}',
-//            ],
-        ],
-    ]); ?>
-
-    <?php BPjax::end(); ?>
+        ]
+    );
+    $pjaxGrid->run();
+    ?>
 
 </div>
