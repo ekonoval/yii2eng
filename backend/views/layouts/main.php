@@ -5,6 +5,7 @@ use backend\ext\User\BUserRbac;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
@@ -30,25 +31,32 @@ $ctrl = $this->context;
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Series Translator',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
-            $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-            ];
+
+            //$menuItems = [['label' => 'Home', 'url' => ['/site/index']],];
+
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/auth/login']];
             } else {
                 $roleName = BUserRbac::getRoleName(Yii::$app->user->identity->role);
+
+                $menuItems[] = [
+                    'label' => 'Movies',
+                    'url' => Url::to(['/translate/movie/index'])
+                ];
+
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . " - {$roleName}". ')',
                     'url' => ['/auth/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
