@@ -103,6 +103,17 @@ class WordController extends TranslateController
         }
     }
 
+    public function actionDelete($id)
+    {
+        $model = BWordSave::findModel($id);
+
+        if ($model) {
+            $model->delete();
+        }
+
+        return $this->redirect($this->composeWordsIndex($model->episodeID));
+    }
+
     public function composeEpisodePlusSeasonString(TrEpisode $episode)
     {
         return "S{$episode->seasonNum}-E{$episode->episodeNum}";
