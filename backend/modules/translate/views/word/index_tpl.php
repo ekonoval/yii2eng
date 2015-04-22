@@ -14,7 +14,7 @@ use yii\helpers\Html;
 /** @var TranslateController $ctrl */
 $ctrl = $this->context;
 
-$this->title = 'Words for episode '.$title;
+$this->title = "{$title} words";
 
 ?>
 

@@ -26,7 +26,7 @@ abstract class TranslateController extends BackendController
 
     protected function bcMovieIndex()
     {
-        $this->addBreadcrump('Movies', $this->composeModuleUrl(null, 'movie'));
+        $this->addBreadcrump('Movies', $this->composeModuleUrl('index', 'movie'));
     }
 
     protected function bcMovieEpisodes($movieID = null)

@@ -1,8 +1,10 @@
 <?php
 namespace backend\modules\translate\controllers;
 
+use backend\modules\translate\models\Word\BWordSave;
 use backend\modules\translate\models\Word\BWordSearch;
 use common\models\Translate\TrEpisode;
+use common\models\Translate\TrWord;
 use Yii;
 
 class WordController extends TranslateController
@@ -11,6 +13,41 @@ class WordController extends TranslateController
      * @var TrEpisode
      */
     public $episodeCurrent;
+
+    protected function breadcrumps()
+    {
+        parent::breadcrumps();
+
+        $episodeID = yR()->get('episodeID');
+
+        if (in_array($this->action->id, ['update', 'create'])) {
+            $wordID = yR()->get('id');
+            $word = TrWord::find()->select('episodeID')->filterWhere(['wordID' => $wordID])->one();
+
+            if ($word) {
+                $episodeID = $word->episodeID;
+            }
+        }
+
+        if ($episodeID > 0) {
+            /** @var TrEpisode $episode */
+            $episode = TrEpisode::find()
+                //->with('movie')
+                ->where('episodeID = :episodeID', [':episodeID' => $episodeID])
+                ->one()
+            ;
+
+            if (!empty($episode)) {
+                $this->episodeCurrent = $episode;
+                $this->bcMovieEpisodes($episode->movieID);
+
+                $this->addBreadcrump(
+                    $this->composeEpisodePlusSeasonString($episode),
+                    $this->composeWordsIndex($episodeID)
+                );
+            }
+        }
+    }
 
     public function actionIndex($episodeID)
     {
@@ -31,43 +68,19 @@ class WordController extends TranslateController
 
     public function actionUpdate($id)
     {
-        $model = new AdminCrudSave();
+        $model = BWordSave::findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect(['index']);
+        if (
+            $model->load(yR()->post())
+            && $model->save()
+        ) {
+            return $this->redirect($this->composeWordsIndex($model->episodeID));
         } else {
             //pa($model->getErrors());
-            return $this->render('create_tpl', [
+            return $this->render('edit_tpl', [
                 'model' => $model,
-                'roles' => $roles,
+                'title' => 'title1'
             ]);
-        }
-    }
-
-    protected function breadcrumps()
-    {
-        parent::breadcrumps();
-
-        $episodeID = yR()->get('episodeID');
-
-        if ($episodeID > 0) {
-            /** @var TrEpisode $episode */
-            $episode = TrEpisode::find()
-                //->with('movie')
-                ->where('episodeID = :episodeID', [':episodeID' => $episodeID])
-                ->one()
-            ;
-
-            if (!empty($episode)) {
-                $this->episodeCurrent = $episode;
-                $this->bcMovieEpisodes($episode->movieID);
-
-                $this->addBreadcrump(
-                    $this->composeEpisodePlusSeasonString($episode),
-                    $this->composeModuleUrl(null, 'word', ['episodeID' => $episodeID])
-                );
-            }
         }
     }
 
@@ -76,5 +89,9 @@ class WordController extends TranslateController
         return "S{$episode->seasonNum}-E{$episode->episodeNum}";
     }
 
+    protected function composeWordsIndex($episodeID)
+    {
+        return $this->composeModuleUrl('index', 'word', ['episodeID' => $episodeID]);
+    }
 
 }
