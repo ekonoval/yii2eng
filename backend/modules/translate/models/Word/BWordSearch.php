@@ -32,7 +32,7 @@ class BWordSearch extends TrWord
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            //'sort' => ['defaultOrder' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_ASC]],
+            'sort' => ['defaultOrder' => ['wordID' => SORT_DESC]],
             'pagination' => [
                 'pageSize' => 15
             ]

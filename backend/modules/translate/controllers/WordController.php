@@ -20,7 +20,7 @@ class WordController extends TranslateController
 
         $episodeID = yR()->get('episodeID');
 
-        if (in_array($this->action->id, ['update', 'create'])) {
+        if (in_array($this->action->id, ['update'])) {
             $wordID = yR()->get('id');
             $word = TrWord::find()->select('episodeID')->filterWhere(['wordID' => $wordID])->one();
 
@@ -80,6 +80,25 @@ class WordController extends TranslateController
             return $this->render('edit_tpl', [
                 'model' => $model,
                 'title' => 'title1'
+            ]);
+        }
+    }
+
+    public function actionCreate()
+    {
+        $model = new BWordSave();
+
+        $modelLoaded = $model->load(yR()->post());
+        $model->episodeID = $this->episodeCurrent->episodeID;
+
+        if ($modelLoaded && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($this->composeWordsIndex($model->episodeID));
+        } else {
+            //pa($model->getErrors());
+            return $this->render('edit_tpl', [
+                'model' => $model,
+                'title' => "Create a word",
             ]);
         }
     }

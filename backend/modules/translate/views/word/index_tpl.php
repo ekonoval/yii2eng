@@ -22,6 +22,10 @@ $this->title = "{$title} words";
 
     <h3><?= Html::encode($this->title) ?></h3>
 
+    <p>
+        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'word', ['episodeID' => $ctrl->episodeCurrent->episodeID]), ['class' => 'btn-sm btn-success']) ?>
+    </p>
+
     <?php
     $pjaxGrid = new BGridPjaxWidget(
         $searchModel,
