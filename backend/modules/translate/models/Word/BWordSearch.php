@@ -34,7 +34,7 @@ class BWordSearch extends TrWord
             'query' => $query,
             //'sort' => ['defaultOrder' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_ASC]],
             'pagination' => [
-                'pageSize' => 10
+                'pageSize' => 15
             ]
         ]);
 

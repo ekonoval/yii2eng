@@ -12,6 +12,39 @@ class WordController extends TranslateController
      */
     public $episodeCurrent;
 
+    public function actionIndex($episodeID)
+    {
+        $searchModel = new BWordSearch();
+        $searchModel->setEpisodeID($episodeID);
+        //$dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        $filterUrl = $this->createWordsListUrl($episodeID);
+
+        return $this->renderActionTpl([
+            'title' => $this->composeEpisodePlusSeasonString($this->episodeCurrent),
+            'filterUrl' => $filterUrl,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = new AdminCrudSave();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
+        } else {
+            //pa($model->getErrors());
+            return $this->render('create_tpl', [
+                'model' => $model,
+                'roles' => $roles,
+            ]);
+        }
+    }
+
     protected function breadcrumps()
     {
         parent::breadcrumps();
@@ -43,20 +76,5 @@ class WordController extends TranslateController
         return "S{$episode->seasonNum}-E{$episode->episodeNum}";
     }
 
-    public function actionIndex($episodeID)
-    {
-        $searchModel = new BWordSearch();
-        $searchModel->setEpisodeID($episodeID);
-        //$dataProvider = $searchModel->search(Yii::$app->request->post());
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $filterUrl = $this->createWordsListUrl($episodeID);
-
-        return $this->renderActionTpl([
-            'title' => $this->composeEpisodePlusSeasonString($this->episodeCurrent),
-            'filterUrl' => $filterUrl,
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel
-        ]);
-    }
 }

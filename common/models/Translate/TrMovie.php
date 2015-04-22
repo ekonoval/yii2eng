@@ -2,6 +2,7 @@
 
 namespace common\models\Translate;
 
+use common\ext\System\ActiveRecordCustom;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -12,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property string $movieName
  * @property string $createDate
  */
-class TrMovie extends ActiveRecord
+class TrMovie extends ActiveRecordCustom
 {
     /**
      * @inheritdoc

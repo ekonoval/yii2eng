@@ -2,8 +2,8 @@
 
 namespace common\models\Translate;
 
+use common\ext\System\ActiveRecordCustom;
 use Yii;
-use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $episodeNum
  * @property integer $movieID
  */
-class TrEpisode extends \yii\db\ActiveRecord
+class TrEpisode extends ActiveRecordCustom
 {
     /**
      * @inheritdoc

@@ -102,3 +102,8 @@ a.desc:after {
     float: right;
     display: block;
 }
+
+.grid-view .pagination > li > a,
+.grid-view .pagination > li > span{
+    padding: 3px 6px;
+}

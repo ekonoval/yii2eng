@@ -30,10 +30,11 @@ class BEpisodeSearch extends TrEpisode
     public function search($params)
     {
         $query = static::find();
+        $query->andFilterWhere(['movieID' => $this->movieID]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_ASC]],
+            'sort' => ['defaultOrder' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_DESC]],
             'pagination' => [
                 'pageSize' => 10
             ]

@@ -2,6 +2,7 @@
 
 namespace common\models\Translate;
 
+use common\ext\System\ActiveRecordCustom;
 use Yii;
 
 /**
@@ -14,7 +15,7 @@ use Yii;
  * @property integer $isHard
  * @property integer $superHard
  */
-class TrWord extends \yii\db\ActiveRecord
+class TrWord extends ActiveRecordCustom
 {
     /**
      * @inheritdoc
