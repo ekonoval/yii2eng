@@ -49,7 +49,12 @@ class TrEpisode extends \yii\db\ActiveRecord
 
     public function getWords()
     {
-        $this->hasMany(TrWord::className(), ['episodeID']);
+        return $this->hasMany(TrWord::className(), ['episodeID']);
+    }
+
+    public function getMovie()
+    {
+        return $this->hasOne(TrMovie::className(), ['movieID' => 'movieID']);
     }
 
     public function getSeasonNumList()

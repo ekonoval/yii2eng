@@ -1,5 +1,6 @@
 <?php
 use backend\assets\AppAsset;
+use backend\ext\System\BackendController;
 use backend\ext\User\BUserRbac;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -10,6 +11,9 @@ use yii\widgets\Breadcrumbs;
 /* @var $content string */
 
 AppAsset::register($this);
+
+/** @var BackendController $ctrl */
+$ctrl = $this->context;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -53,10 +57,11 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+            <?= Breadcrumbs::widget([
+                //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'links' => $ctrl->bc,
+            ]) ?>
+            <?= $content ?>
         </div>
     </div>
 

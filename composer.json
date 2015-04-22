@@ -29,6 +29,9 @@
     "config": {
         "process-timeout": 1800
     },
+    "autoload": {
+        "files": ["common/ext/Helpers/shortcuts.php"]
+    },
     "extra": {
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",

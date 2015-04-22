@@ -15,7 +15,7 @@ use backend\ext\System\BackendController;
 $ctrl = $this->context;
 
 $this->title = 'Episodes';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getModuleUrl(null, null, ['movieID' => 5])];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->composeModuleUrl(null, null, ['movieID' => 5])];
 
 ?>
 
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getMo
                 'attribute' => 'lnkWords',
                 'value' => function($data) use ($ctrl){
                     return Html::a("[words]",
-                        $ctrl->getModuleUrl('index', 'word', ['episodeID' => $data->episodeID]),
+                        $ctrl->composeModuleUrl('index', 'word', ['episodeID' => $data->episodeID]),
                         ['data-pjax' => 0]
                     );
                 },

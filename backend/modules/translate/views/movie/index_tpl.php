@@ -15,8 +15,6 @@ use backend\ext\System\BackendController;
 $ctrl = $this->context;
 
 $this->title = 'Movies';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getModuleUrl()];
-
 ?>
 
 <div class="product-index">
@@ -51,7 +49,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->getMo
                 'attribute' => 'lnkEpisodes',
                 'value' => function($data) use ($ctrl){
                     return Html::a("[episodes]",
-                        $ctrl->getModuleUrl('index', 'episode', ['movieID' => $data->movieID]),
+                        $ctrl->composeModuleUrl('index', 'episode', ['movieID' => $data->movieID]),
                         ['data-pjax' => 0]
                     );
                 },

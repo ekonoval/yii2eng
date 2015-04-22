@@ -12,7 +12,7 @@ class BackendController extends Controller
      * Breadcrumps
      * @var array
      */
-    protected $bc;
+    public $bc = [];
 
     public function addBreadcrump($label, $url, $key = null)
     {
@@ -24,6 +24,15 @@ class BackendController extends Controller
             $this->bc[] = $item;
         }
     }
+
+    protected function breadcrumps(){}
+
+    public function beforeAction($action)
+    {
+        $this->breadcrumps();
+        return parent::beforeAction($action);
+    }
+
 
     /**
      * @inheritdoc
@@ -72,7 +81,7 @@ class BackendController extends Controller
         return parent::render($view, $params);
     }
 
-    public function getModuleUrl($action = null, $ctrl = null, $params = [], $module = null)
+    public function composeModuleUrl($action = null, $ctrl = null, $params = [], $module = null)
     {
         if (is_null($action)) {
             $action = $this->action->id;

@@ -2,10 +2,19 @@
 namespace backend\modules\translate\controllers;
 
 use backend\modules\translate\models\Episode\BEpisodeSearch;
+use common\models\Translate\TrMovie;
 use Yii;
 
 class EpisodeController extends TranslateController
 {
+    protected function breadcrumps()
+    {
+        parent::breadcrumps();
+
+        $this->bcMovieEpisodes();
+    }
+
+
     public function actionIndex($movieID = null)
     {
         $searchModel = new BEpisodeSearch();
@@ -21,4 +30,5 @@ class EpisodeController extends TranslateController
             'searchModel' => $searchModel
         ]);
     }
+
 }
