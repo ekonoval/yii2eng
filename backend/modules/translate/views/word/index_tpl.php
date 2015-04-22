@@ -2,7 +2,7 @@
 use backend\ext\System\BPjax;
 use backend\modules\translate\controllers\TranslateController;
 use backend\modules\translate\models\Word\BWordSearch;
-use common\ext\Grid\Columns\BooleanColumn;
+use backend\ext\Grid\Columns\BooleanColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $filterUrl];
                 'attribute' => 'superHard',
                 'class' => BooleanColumn::className()
             ],
-
 
             [
                 'class' => 'yii\grid\ActionColumn',

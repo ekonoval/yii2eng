@@ -1,5 +1,5 @@
 <?php
-namespace common\ext\Grid\Columns;
+namespace backend\ext\Grid\Columns;
 
 use yii\grid\DataColumn;
 
