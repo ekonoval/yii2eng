@@ -249,11 +249,18 @@ class StsApi
         return $this->performPutRequest('/appointment/'.$id, $params);
     }
 
-    public function appointmentsList($filter = array())
+    /**
+     * @param $mainParams
+     * @param array $filter
+     * @return mixed
+     */
+    public function appointmentsList($mainParams, $filter = array())
     {
         $params = $this->jsonifiedFilterParams($filter);
 
-        return $this->performGetRequest('appointment', $params);
+        $mainParams = array_merge($params, $mainParams);
+
+        return $this->performGetRequest('appointment', $mainParams);
     }
 
     public function appointmentDelete($aptID)
