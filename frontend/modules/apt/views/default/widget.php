@@ -20,7 +20,7 @@
 <!-- End Setster Widget -->
 
 <? */ ?>
-
+<? /* ?>
 <!-- Begin Setster Widget -->
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
@@ -41,16 +41,9 @@
   var setster_widget = new Setster.setster_widget(setster_widget_options);
 </script>
 <!-- End Setster Widget -->
+<? */ ?>
 
 
-<script type="text/javascript">
-    //setster_widget.show();
-</script>
-
-
-
-
-<? /* ?>
 <!-- Begin Setster Widget -->
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
@@ -60,16 +53,24 @@
 
 <script type="text/javascript" charset="utf-8">
   var setster_widget_options = {};
-  setster_widget_options.display = "overlay";  
+  setster_widget_options.display = "embed";
   setster_widget_options.uri = "ykonoval";
-  setster_widget_options.placement = "right";  
-  setster_widget_options.buttonName = "availability";  
-  setster_widget_options.defaultProvider = "19237";  
-  setster_widget_options.setsterURL = setsHost; 
+  setster_widget_options.placement = "right";
+  setster_widget_options.buttonName = "appointment";
+  setster_widget_options.locationsMap = 1;
+  setster_widget_options.defaultProvider = "19294";
+  setster_widget_options.defaultLocation = "20841";
+  setster_widget_options.setsterURL = setsHost;
   var setster_widget = new Setster.setster_widget(setster_widget_options);
-
-  setster_widget.show();
 </script>
 <!-- End Setster Widget -->
-<? */ ?>
+
+
+
+<script type="text/javascript">
+    //setster_widget.show();
+</script>
+
+
+
 <h4>/---------------------/</h4>

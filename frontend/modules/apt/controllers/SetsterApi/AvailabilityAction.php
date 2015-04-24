@@ -11,16 +11,16 @@ class AvailabilityAction extends SetsterAction
         //$tz = $apiObj->getTimezones();var_export($tz);exit;
 
         $locationID = $this->locationID;
-        $locationID = $this->location4;
+        //$locationID = $this->location4;
 
         $res = array();
         for($day = 13; $day <= 26; $day++ ){
-            $startDate = "2015-05-{$day}";
+            $startDate = "2015-04-{$day}";
 
             $params = array(
-                'service_id' => 38271,
-                'location_id' => $this->location4,
-                'provider_id' => '19294',
+                'service_id' => $this->serviceID,
+                'location_id' => $locationID,
+                'provider_id' => $this->employeeID,
                 //'start_date' => date('Y-m-d'),
                 'start_date' => $startDate,
                 //'start_date' => '2015-04-17',
@@ -32,11 +32,12 @@ class AvailabilityAction extends SetsterAction
                 //'timezone_id' => $this->timezoneID,
                 //'timezone_id' => 552,
                 //'timezone_id' => 546,
+                'timezone_id' => 164, // -2
             );
 
-            //$res[] = $apiObj->availabilityGet($params);
+            $res[] = $apiObj->availabilityGet($params);
         }
-        //pa($res);exit;
+        pa($res);exit;
 
         $locationID = $this->locationID;
         $params = array(
@@ -50,12 +51,13 @@ class AvailabilityAction extends SetsterAction
             'return' => 'times',
             //'timezone_id' => $this->timezoneID,
 //            'timezone_id' => 552, // -6 MDT
-//            'timezone_id' => 164, // -2
+            'timezone_id' => 164, // -2
 //            'timezone_id' => 306, // 0
 //            'timezone_id' => 422, // +1
-//            'timezone_id' => 320, // +10
-//            'timezone_id' => 414, // +3
+            //'timezone_id' => 320, // +10
+            //'timezone_id' => 414, // +3
         );
+        var_export($params);
         //$avail = $apiObj->employeeAvailabilityGet($this->employeeID);
         $avail = $apiObj->availabilityGet($params);
 
