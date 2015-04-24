@@ -49,7 +49,7 @@ class TrEpisode extends ActiveRecordCustom
 
     public function getWords()
     {
-        return $this->hasMany(TrWord::className(), ['episodeID']);
+        return $this->hasMany(TrWord::className(), ['episodeID' => 'episodeID']);
     }
 
     public function getMovie()
