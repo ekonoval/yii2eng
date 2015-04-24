@@ -1,5 +1,5 @@
 <?php
-namespace backend\ext\Grid\Save;
+namespace backend\ext\Grid\Crud;
 
 use backend\ext\System\BackendController;
 use common\ext\System\ActiveRecordCustom;

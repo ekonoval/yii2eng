@@ -1,7 +1,7 @@
 <?php
 namespace backend\modules\translate\controllers\Episode;
 
-use backend\ext\Grid\Save\SaveAction;
+use backend\ext\Grid\Crud\SaveAction;
 use backend\modules\translate\controllers\EpisodeController;
 use backend\modules\translate\models\Episode\BEpisodeSave;
 

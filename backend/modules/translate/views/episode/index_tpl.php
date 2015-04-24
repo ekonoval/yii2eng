@@ -17,13 +17,16 @@ use backend\ext\System\BackendController;
 $ctrl = $this->context;
 
 $this->title = 'Episodes';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->composeModuleUrl(null, null, ['movieID' => 5])];
 
 ?>
 
 <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'episode', ['movieID' => $movieID]), ['class' => 'btn-sm btn-success']) ?>
+    </p>
 
     <?php
     $pjaxGrid = new BGridPjaxWidget(

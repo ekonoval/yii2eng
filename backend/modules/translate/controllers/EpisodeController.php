@@ -24,7 +24,6 @@ class EpisodeController extends TranslateController
         ];
     }
 
-
     public function actionIndex($movieID = null)
     {
         $searchModel = new BEpisodeSearch();
@@ -35,6 +34,7 @@ class EpisodeController extends TranslateController
         $filterUrl = $this->createEpisodesIndexUrl($movieID);
 
         return $this->renderActionTpl([
+            'movieID' => $movieID,
             'filterUrl' => $filterUrl,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel
