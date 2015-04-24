@@ -7,6 +7,9 @@ use yii\db\ActiveRecord;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 
+/**
+ * Pjax begin/end and preconfigured GridView in single widget
+ */
 class BGridPjaxWidget extends Widget
 {
     protected $gridConfig;
@@ -40,7 +43,6 @@ class BGridPjaxWidget extends Widget
         echo GridView::widget($this->gridConfig);
 
         BPjax::end();
-
 
     }
 

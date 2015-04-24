@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\translate\controllers;
 
+use backend\modules\translate\controllers\Episode\EpisodeEditAction;
 use backend\modules\translate\models\Episode\BEpisodeSearch;
 use common\models\Translate\TrMovie;
 use Yii;
@@ -12,6 +13,13 @@ class EpisodeController extends TranslateController
         parent::breadcrumps();
 
         $this->bcMovieEpisodes();
+    }
+
+    public function actions()
+    {
+        return [
+            'update' => EpisodeEditAction::className()
+        ];
     }
 
 

@@ -1,5 +1,6 @@
 <?php
 use backend\ext\Grid\BGridPjaxWidget;
+use backend\ext\Grid\Columns\BActionColumn;
 use backend\ext\System\BPjax;
 use backend\modules\translate\models\Episode\BEpisodeSearch;
 use backend\modules\translate\models\Movie\BMovieSearch;
@@ -50,6 +51,10 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->compo
                 },
                 'contentOptions' => ['style' => 'width: 100px; text-align:center;'],
                 'format' => 'raw'
+            ],
+
+            [
+                'class' => BActionColumn::className(),
             ],
         ]
     );
