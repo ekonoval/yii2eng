@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\translate\controllers;
 
+use backend\modules\translate\controllers\Episode\EpisodeCreateAction;
 use backend\modules\translate\controllers\Episode\EpisodeEditAction;
 use backend\modules\translate\models\Episode\BEpisodeSearch;
 use common\models\Translate\TrMovie;
@@ -18,7 +19,8 @@ class EpisodeController extends TranslateController
     public function actions()
     {
         return [
-            'update' => EpisodeEditAction::className()
+            'update' => EpisodeEditAction::className(),
+            'create' => EpisodeCreateAction::className()
         ];
     }
 

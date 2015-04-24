@@ -1,11 +1,22 @@
 <?php
 namespace backend\ext\Grid\Save;
 
+use backend\ext\System\BackendController;
 use common\ext\System\ActiveRecordCustom;
 use yii\base\Action;
 
+/**
+ * @property BackendController $controller
+ */
 class SaveAction extends Action
 {
+    const ACTION_TYPE_UPDATE = 2;
+    const ACTION_TYPE_CREATE = 3;
+
+    public $actionType = self::ACTION_TYPE_UPDATE;
+
+    //public $viewTplPath = '@backend/views/default/edit_tpl';
+    public $viewTplPath = '//default/edit_tpl';
 
     public $modelClass;
 
@@ -16,9 +27,15 @@ class SaveAction extends Action
 
     protected $pk;
 
-    protected function prepareModel($modelClass)
+    protected function prepareModel()
     {
-        $this->model = $modelClass::findModel($this->id);
+        $modelClass = $this->modelClass;
+
+        if ($this->actionType == self::ACTION_TYPE_UPDATE) {
+            $this->model = $modelClass::findModel($this->pk);
+        } elseif ($this->actionType == self::ACTION_TYPE_CREATE) {
+            $this->model = new $modelClass();
+        }
     }
 
     protected function setPk($id)
@@ -39,23 +56,37 @@ class SaveAction extends Action
 
     protected function initCustom()
     {
+
+    }
+
+    protected function composeViewParams()
+    {
+
+        $editFormViewPath = "@backend/modules/{$this->controller->module->id}/views/{$this->controller->id}/".
+            "_edit_form_tpl";
+
+        return [
+            'editFormViewPath' => $editFormViewPath,
+            'data' => [
+                'model' => $this->model,
+                'title' => 'title1'
+            ]
+        ];
     }
 
     public function runCustom()
     {
-        $this->prepareModel($this->modelClass);
+        $this->prepareModel();
 
         if (
-            $this->model->load(yR()->post())
+            yR()->isPost
+            && $this->model->load(yR()->post())
             && $this->model->save()
         ) {
             return $this->redirectAfterSave();
         } else {
             //pa($model->getErrors());
-            return $this->render('edit_tpl', [
-                'model' => $this->model,
-                'title' => 'title1'
-            ]);
+            return $this->controller->render($this->viewTplPath, $this->composeViewParams());
         }
     }
 
