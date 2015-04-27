@@ -29,7 +29,7 @@ abstract class TranslateController extends BackendController
         $this->addBreadcrump('Movies', $this->composeModuleUrl('index', 'movie'));
     }
 
-    protected function bcMovieEpisodes($movieID = null)
+    public function bcMovieEpisodes($movieID = null)
     {
         if (is_null($movieID)) {
             $movieID = Yii::$app->request->get('movieID');
