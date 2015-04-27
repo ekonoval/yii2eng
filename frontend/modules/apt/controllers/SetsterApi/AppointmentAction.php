@@ -61,12 +61,15 @@ class AppointmentAction extends SetsterAction
             'timezone_id' => $tzID,
             'service_id' => $this->serviceID,
 //            'num_results' => 1
-            //'start_date' => '2015-05-16 08:00:00',
+            //'start_date' => '2015-04-29 08:00:00',
+            //'end_date' => '2015-05-01 08:00:00',
+            //'start' => 2,
+            //'end' => 'all',
             //'start' => '2015-05-16T08:00:00-10:00',
             //'end' => '2015-05-18T08:00:00-10:00'
 //            'start' => '2015-04-23',
 //            'end' => 'www',
-            'id' => 6302841122
+            //'id' => 6302841122
         );
 
         $list = $apiObj->appointmentsList($mainParams, $aptFilter);

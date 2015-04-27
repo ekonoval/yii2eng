@@ -260,7 +260,12 @@ class StsApi
 
         $mainParams = array_merge($params, $mainParams);
 
-        return $this->performGetRequest('appointment', $mainParams);
+        $cmd = "appointment";
+        if (isset($mainParams["id"])) {
+            $cmd .= "/{$mainParams["id"]}";
+        }
+
+        return $this->performGetRequest($cmd, $mainParams);
     }
 
     public function appointmentDelete($aptID)

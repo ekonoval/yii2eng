@@ -6,6 +6,7 @@ class AvailabilityAction extends SetsterAction
     public function run()
     {
         $apiObj = $this->apiObj;
+        //$this->controller->regenerateAuthToken();
         //pa(date('Y-m-d'));exit;
 
         //$tz = $apiObj->getTimezones();var_export($tz);exit;
@@ -35,9 +36,9 @@ class AvailabilityAction extends SetsterAction
                 'timezone_id' => 164, // -2
             );
 
-            $res[] = $apiObj->availabilityGet($params);
+            //$res[] = $apiObj->availabilityGet($params);
         }
-        pa($res);exit;
+        //pa($res);exit;
 
         $locationID = $this->locationID;
         $params = array(
