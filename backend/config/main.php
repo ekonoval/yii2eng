@@ -19,6 +19,9 @@ return [
         'auth' => [
             'class' => 'backend\modules\auth\Auth',
         ],
+        'translate' => [
+            'class' => 'backend\modules\translate\TranslateMod',
+        ],
     ],
     'components' => [
         'user' => [
@@ -36,6 +39,9 @@ return [
             'showScriptName' => false,
             'rules' => array(
                 '/auth/<a:\w+>' => 'auth/auth/<a>',
+                '/translate/episode/index/movieID/<movieID:\d+>' => 'translate/episode/index',
+                '/translate/word/index/episodeID/<episodeID:\d+>' => 'translate/word/index',
+
             )
         ],
 
