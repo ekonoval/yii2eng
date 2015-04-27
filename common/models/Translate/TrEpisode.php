@@ -87,4 +87,9 @@ class TrEpisode extends ActiveRecordCustom
 
         return $options;
     }
+
+    public function composeStringRepresentation()
+    {
+        return "S{$this->seasonNum}-E{$this->episodeNum}";
+    }
 }
