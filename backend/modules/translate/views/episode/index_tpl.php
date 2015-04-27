@@ -1,5 +1,6 @@
 <?php
 use backend\ext\Grid\BGridPjaxWidget;
+use backend\ext\Grid\Columns\BActionColumn;
 use backend\ext\System\BPjax;
 use backend\modules\translate\models\Episode\BEpisodeSearch;
 use backend\modules\translate\models\Movie\BMovieSearch;
@@ -16,13 +17,16 @@ use backend\ext\System\BackendController;
 $ctrl = $this->context;
 
 $this->title = 'Episodes';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->composeModuleUrl(null, null, ['movieID' => 5])];
 
 ?>
 
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
+
+    <p>
+        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'episode', ['movieID' => $movieID]), ['class' => 'btn-sm btn-success']) ?>
+    </p>
 
     <?php
     $pjaxGrid = new BGridPjaxWidget(
@@ -50,6 +54,10 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => $ctrl->compo
                 },
                 'contentOptions' => ['style' => 'width: 100px; text-align:center;'],
                 'format' => 'raw'
+            ],
+
+            [
+                'class' => BActionColumn::className(),
             ],
         ]
     );

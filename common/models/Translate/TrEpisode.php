@@ -49,7 +49,7 @@ class TrEpisode extends ActiveRecordCustom
 
     public function getWords()
     {
-        return $this->hasMany(TrWord::className(), ['episodeID']);
+        return $this->hasMany(TrWord::className(), ['episodeID' => 'episodeID']);
     }
 
     public function getMovie()
@@ -86,5 +86,10 @@ class TrEpisode extends ActiveRecordCustom
         $options = ArrayHelper::map($seasons, 'seasonNum', 'seasonNum');
 
         return $options;
+    }
+
+    public function composeStringRepresentation()
+    {
+        return "S{$this->seasonNum}-E{$this->episodeNum}";
     }
 }
