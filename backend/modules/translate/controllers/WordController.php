@@ -1,11 +1,15 @@
 <?php
 namespace backend\modules\translate\controllers;
 
+use backend\modules\translate\ext\EpisodeWordsImporter;
+use backend\modules\translate\models\Word\WordsImportModel;
 use backend\modules\translate\models\Word\BWordSave;
 use backend\modules\translate\models\Word\BWordSearch;
+use common\ext\Misc\FlashMessageCreator;
 use common\models\Translate\TrEpisode;
 use common\models\Translate\TrWord;
 use Yii;
+use yii\web\UploadedFile;
 
 class WordController extends TranslateController
 {
@@ -112,6 +116,37 @@ class WordController extends TranslateController
         }
 
         return $this->redirect($this->composeWordsIndex($model->episodeID));
+    }
+
+    public function actionImport($episodeID)
+    {
+        $model = new WordsImportModel();
+
+//        $wordsImporter = new EpisodeWordsImporter($episodeID, file_get_contents('/home/ekonoval/Documents/eng-work.txt'));
+//        $wordsImporter->mainImport();exit;
+
+        if (yR()->isPost) {
+            $model->importFile = UploadedFile::getInstance($model, 'importFile');
+
+            if ($model->importFile && $model->validate()) {
+                $contents = file_get_contents($model->importFile->tempName);
+                $wordsImporter = new EpisodeWordsImporter($episodeID, $contents);
+                $wordsAmountImported = $wordsImporter->mainImport();
+
+                $fm = new FlashMessageCreator();
+                if ($wordsAmountImported > 0) {
+                    $fm->addSuccess("Amount of words imported: {$wordsAmountImported}");
+                } else {
+                    $fm->addWarning('No words have been imported!');
+                }
+
+                return $this->redirect($this->composeWordsIndex($episodeID));
+            }
+        }
+
+        return $this->renderActionTpl([
+            'model' => $model
+        ]);
     }
 
     public function composeEpisodePlusSeasonString(TrEpisode $episode)

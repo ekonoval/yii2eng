@@ -15,7 +15,7 @@ use yii\helpers\Html;
 $ctrl = $this->context;
 
 $this->title = "{$title} words";
-
+$episodeID = $ctrl->episodeCurrent->episodeID;
 ?>
 
 <div class="product-index">
@@ -23,7 +23,8 @@ $this->title = "{$title} words";
     <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'word', ['episodeID' => $ctrl->episodeCurrent->episodeID]), ['class' => 'btn-sm btn-success']) ?>
+        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-success']) ?>
+        <?= Html::a('Import from file', $ctrl->composeModuleUrl('import', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-primary']) ?>
     </p>
 
     <?php

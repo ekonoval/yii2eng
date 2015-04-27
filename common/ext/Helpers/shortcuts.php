@@ -9,6 +9,14 @@ function yR()
 }
 
 /**
+ * @return \yii\db\Connection
+ */
+function yDb()
+{
+    return Yii::$app->db;
+}
+
+/**
  * @return \yii\web\Session
  */
 function ySession()
