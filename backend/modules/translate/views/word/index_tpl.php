@@ -1,5 +1,7 @@
 <?php
 use backend\ext\Grid\BGridPjaxWidget;
+use backend\ext\Grid\Columns\BCheckboxColumn;
+use backend\ext\Grid\Widgets\DeleteButton\DeleteButton;
 use backend\ext\System\BPjax;
 use backend\modules\translate\controllers\TranslateController;
 use backend\modules\translate\models\Word\BWordSearch;
@@ -16,6 +18,15 @@ $ctrl = $this->context;
 
 $this->title = "{$title} words";
 $episodeID = $ctrl->episodeCurrent->episodeID;
+
+$js = <<<JS
+    setInterval(function(){
+        console.log($('#mainGridId').yiiGridView('getSelectedRows'));
+    }, 2000);
+
+JS;
+
+//$this->registerJs($js);
 ?>
 
 <div class="product-index">
@@ -25,6 +36,7 @@ $episodeID = $ctrl->episodeCurrent->episodeID;
     <p>
         <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-success']) ?>
         <?= Html::a('Import from file', $ctrl->composeModuleUrl('import', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-primary']) ?>
+        <?= DeleteButton::widget(); ?>
     </p>
 
     <?php
@@ -33,7 +45,11 @@ $episodeID = $ctrl->episodeCurrent->episodeID;
         $dataProvider,
         [
             [
-                'class' => 'yii\grid\CheckboxColumn',
+                'class' => BCheckboxColumn::className(),
+//                'checkboxOptions' => ['class' => 'fake0'],
+//                //'filterOptions' => ['class' => 'fake1'],
+//                'headerOptions' => ['class' => 'fake2'],
+//                'options' => ['class' => 'fake3']
             ],
             'wordID',
             [
