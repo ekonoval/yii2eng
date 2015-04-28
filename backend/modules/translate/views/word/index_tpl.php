@@ -1,5 +1,6 @@
 <?php
 use backend\ext\Grid\BGridPjaxWidget;
+use backend\ext\Grid\Columns\BActionColumn;
 use backend\ext\Grid\Columns\BCheckboxColumn;
 use backend\ext\Grid\Widgets\DeleteButton\DeleteButton;
 use backend\ext\System\BPjax;
@@ -57,8 +58,7 @@ $episodeID = $ctrl->episodeCurrent->episodeID;
             ],
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}{delete}',
+                'class' => BActionColumn::className(),
             ],
         ],
         $filterUrl
