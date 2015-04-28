@@ -16,6 +16,4 @@ class MovieSaveAction extends SaveAction
     {
         $this->controller->redirect('index');
     }
-
-
 }
