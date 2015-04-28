@@ -15,10 +15,12 @@ class BCheckboxColumn extends CheckboxColumn
         parent::init();
         $this->name = self::INPUT_NAME;
 
+        /*
+         * Add CHECKBOXES_CSS_CLASS for all controlling checkboxes
+         */
         $this->checkboxOptions = ['class' => self::CHECKBOXES_CSS_CLASS];
 
         $this->registerJs();
-
     }
 
     private function registerJs()
@@ -28,6 +30,9 @@ class BCheckboxColumn extends CheckboxColumn
 
         $this->grid->view->registerJs("var anyControlCheckboxSelected = false;", View::POS_HEAD);
 
+        /*
+         * Change anyControlCheckboxSelected on any controlling checkbox click
+         */
         $js = <<<EOD
 $("{$cbSelector}").change(function(){
     anyControlCheckboxSelected = $('#{$this->grid->id}').yiiGridView('getSelectedRows').length > 0;
@@ -39,7 +44,7 @@ EOD;
     }
 
     /**
-     * Almost completly copied from parent
+     * Almost completly copied from parent and just added css class to 'select all' cehckbox CHECKBOXES_CSS_CLASS
      * @return string
      */
     protected function renderHeaderCellContent()

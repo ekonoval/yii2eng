@@ -49,7 +49,7 @@ EOD1;
         $this->registerJs();
 
         $html = Html::a('Delete',
-            $this->deleteUrl,
+            "",
             ['class' => 'btn-sm btn-warning', 'id' => $this->deleteBtnJsId ]
         );
 

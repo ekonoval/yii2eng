@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\translate\controllers;
 
+use backend\modules\translate\controllers\Word\WordDeleteAction;
 use backend\modules\translate\ext\EpisodeWordsImporter;
 use backend\modules\translate\models\Word\WordsImportModel;
 use backend\modules\translate\models\Word\BWordSave;
@@ -17,6 +18,14 @@ class WordController extends TranslateController
      * @var TrEpisode
      */
     public $episodeCurrent;
+
+    public function actions()
+    {
+        return [
+            'delete' => ['class' => WordDeleteAction::className()]
+        ];
+    }
+
 
     protected function breadcrumps()
     {
@@ -107,17 +116,6 @@ class WordController extends TranslateController
         }
     }
 
-    public function actionDelete()
-    {
-//        $model = BWordSave::findModel($id);
-//
-//        if ($model) {
-//            $model->delete();
-//        }
-//
-//        return $this->redirect($this->composeWordsIndex($model->episodeID));
-    }
-
     public function actionImport($episodeID)
     {
         $model = new WordsImportModel();
@@ -154,7 +152,7 @@ class WordController extends TranslateController
         return "S{$episode->seasonNum}-E{$episode->episodeNum}";
     }
 
-    protected function composeWordsIndex($episodeID)
+    public function composeWordsIndex($episodeID)
     {
         return $this->composeModuleUrl('index', 'word', ['episodeID' => $episodeID]);
     }
