@@ -89,6 +89,15 @@ class SiteController extends BackendController
 
     public function actionTest()
     {
+
+        $a = array('fake', "a" => "apple", "b" => "banana");
+        $b = array('bbbb', "a" => "pear", "b" => "strawberry", "c" => "cherry");
+
+        pa($a + $b);
+        //pa($b + $a);
+
+        pa(array_merge($a, $b));
+
         echo "<h2>Back test  </h2>\n"; exit;
     }
 }

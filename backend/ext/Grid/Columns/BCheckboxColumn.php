@@ -20,6 +20,9 @@ class BCheckboxColumn extends CheckboxColumn
          */
         $this->checkboxOptions = ['class' => self::CHECKBOXES_CSS_CLASS];
 
+        $this->headerOptions = ['class' => 'ctrlCheckboxesRow'];
+        $this->contentOptions = ['class' => 'ctrlCheckboxesRow'];
+
         $this->registerJs();
     }
 

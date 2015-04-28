@@ -33,9 +33,6 @@ $this->title = 'Movies';
         $searchModel,
         $dataProvider,
         [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-            ],
             'movieID',
             'movieName',
             [

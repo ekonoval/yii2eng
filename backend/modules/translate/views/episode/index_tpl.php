@@ -25,7 +25,7 @@ $this->title = 'Episodes';
     <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'episode', ['movieID' => $movieID]), ['class' => 'btn-sm btn-success']) ?>
+        <?= Html::a('Create Episode', $ctrl->composeModuleUrl('create', 'episode', ['movieID' => $movieID]), ['class' => 'btn-sm btn-success']) ?>
     </p>
 
     <?php
@@ -33,9 +33,6 @@ $this->title = 'Episodes';
         $searchModel,
         $dataProvider,
         [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-            ],
             'episodeID',
             //'seasonNum',
             [

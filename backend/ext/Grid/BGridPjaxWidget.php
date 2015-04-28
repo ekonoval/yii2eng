@@ -1,6 +1,7 @@
 <?php
 namespace backend\ext\Grid;
 
+use backend\ext\Grid\Columns\BCheckboxColumn;
 use backend\ext\System\BPjax;
 use yii\base\Widget;
 use yii\db\ActiveRecord;
@@ -17,12 +18,20 @@ class BGridPjaxWidget extends Widget
 
     function __construct(ActiveRecord $searchModel, $dataProvider, $columns, $filterUrl = null, $gridConfig = [])
     {
+        $columnsPredefined = [
+            [
+                'class' => BCheckboxColumn::className(),
+            ]
+        ];
+
+        $columns = array_merge($columnsPredefined, $columns);
+
         $customConfig = [
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => $columns,
 
-            'layout' => '{pager}{items}{pager}',
+            //'layout' => '{pager}{items}{pager}',
             'layout' => '{pager}<div class="spacer"></div>{items}',
             //see GridView default classes
             'tableOptions' => ['class' => 'table table-striped table-bordered table-condensed'],

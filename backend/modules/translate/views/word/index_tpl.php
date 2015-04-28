@@ -38,9 +38,6 @@ $episodeID = $ctrl->episodeCurrent->episodeID;
         $searchModel,
         $dataProvider,
         [
-            [
-                'class' => BCheckboxColumn::className(),
-            ],
             'wordID',
             [
                 'attribute' => 'episodeID',
