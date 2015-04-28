@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\ext\System\BackendController;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BackendController
 {
     /**
      * @inheritdoc
@@ -88,6 +89,15 @@ class SiteController extends Controller
 
     public function actionTest()
     {
+
+        $a = array('fake', "a" => "apple", "b" => "banana");
+        $b = array('bbbb', "a" => "pear", "b" => "strawberry", "c" => "cherry");
+
+        pa($a + $b);
+        //pa($b + $a);
+
+        pa(array_merge($a, $b));
+
         echo "<h2>Back test  </h2>\n"; exit;
     }
 }
