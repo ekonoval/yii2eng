@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
  */
 class BGridPjaxWidget extends Widget
 {
+    const GRID_JS_ID = 'mainGridId';
     protected $gridConfig;
 
     function __construct(ActiveRecord $searchModel, $dataProvider, $columns, $filterUrl = null, $gridConfig = [])
@@ -24,7 +25,8 @@ class BGridPjaxWidget extends Widget
             'layout' => '{pager}{items}{pager}',
             'layout' => '{pager}<div class="spacer"></div>{items}',
             //see GridView default classes
-            'tableOptions' => ['class' => 'table table-striped table-bordered table-condensed']
+            'tableOptions' => ['class' => 'table table-striped table-bordered table-condensed'],
+            'id' => self::GRID_JS_ID
         ];
 
         if (!is_null($filterUrl)) {
