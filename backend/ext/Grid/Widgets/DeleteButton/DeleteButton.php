@@ -19,7 +19,7 @@ class DeleteButton extends Widget
         parent::init();
 
         if (empty($this->deleteUrl)) {
-            $this->deleteUrl = $this->view->context->composeModuleUrl('deleteMulti');
+            $this->deleteUrl = $this->view->context->composeModuleUrl('delete');
         }
 
     }

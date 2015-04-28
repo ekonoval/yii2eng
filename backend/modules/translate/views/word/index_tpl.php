@@ -19,14 +19,6 @@ $ctrl = $this->context;
 $this->title = "{$title} words";
 $episodeID = $ctrl->episodeCurrent->episodeID;
 
-$js = <<<JS
-    setInterval(function(){
-        console.log($('#mainGridId').yiiGridView('getSelectedRows'));
-    }, 2000);
-
-JS;
-
-//$this->registerJs($js);
 ?>
 
 <div class="product-index">
@@ -46,10 +38,6 @@ JS;
         [
             [
                 'class' => BCheckboxColumn::className(),
-//                'checkboxOptions' => ['class' => 'fake0'],
-//                //'filterOptions' => ['class' => 'fake1'],
-//                'headerOptions' => ['class' => 'fake2'],
-//                'options' => ['class' => 'fake3']
             ],
             'wordID',
             [

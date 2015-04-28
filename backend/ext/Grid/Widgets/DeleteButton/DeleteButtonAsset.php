@@ -6,9 +6,6 @@ use yii\web\JqueryAsset;
 
 class DeleteButtonAsset extends AssetBundle
 {
-    //public $js = ['delete-btn.js'];
-
-
     public function init()
     {
         parent::init();

@@ -107,15 +107,15 @@ class WordController extends TranslateController
         }
     }
 
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $model = BWordSave::findModel($id);
-
-        if ($model) {
-            $model->delete();
-        }
-
-        return $this->redirect($this->composeWordsIndex($model->episodeID));
+//        $model = BWordSave::findModel($id);
+//
+//        if ($model) {
+//            $model->delete();
+//        }
+//
+//        return $this->redirect($this->composeWordsIndex($model->episodeID));
     }
 
     public function actionImport($episodeID)
