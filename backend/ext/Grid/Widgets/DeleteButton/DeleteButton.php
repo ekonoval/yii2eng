@@ -5,6 +5,7 @@ use backend\ext\Grid\BGridPjaxWidget;
 use backend\ext\Grid\Columns\BCheckboxColumn;
 use yii\bootstrap\Widget;
 use yii\helpers\Html;
+use yii\web\View;
 
 class DeleteButton extends Widget
 {
@@ -25,24 +26,31 @@ class DeleteButton extends Widget
 
     private function registerJs()
     {
-        $checkboxClass = BCheckboxColumn::CHECKBOXES_CSS_CLASS;
-        $js = <<<EOD
-$("#{$this->gridJsId} .{$checkboxClass}").change(function(){
-alert('cccc');
-});
-EOD;
-        //$this->view->registerJs($js);
+        $deleteMultiBtnOptions = [
+            'deleteUrl' => $this->deleteUrl,
+            'deleteBtnJsId' => $this->deleteBtnJsId,
+            'gridJsId' => $this->gridJsId
+        ];
+        $deleteMultiBtnOptions = json_encode($deleteMultiBtnOptions);
+
+        $jsTop = <<<EOD1
+var deleteMultiBtnOptions = {$deleteMultiBtnOptions};
+EOD1;
+        $this->view->registerJs($jsTop, View::POS_HEAD);
+
     }
 
     public function run()
     {
         parent::run();
 
+        DeleteButtonAsset::register($this->view);
+
         $this->registerJs();
 
         $html = Html::a('Delete',
             $this->deleteUrl,
-            ['class' => 'btn-sm btn-warning disabled', 'id' => $this->deleteBtnJsId ]
+            ['class' => 'btn-sm btn-warning', 'id' => $this->deleteBtnJsId ]
         );
 
         return $html;

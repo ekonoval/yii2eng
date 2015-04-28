@@ -3,6 +3,7 @@ namespace backend\ext\Grid\Columns;
 
 use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
+use yii\web\View;
 
 class BCheckboxColumn extends CheckboxColumn
 {
@@ -25,8 +26,9 @@ class BCheckboxColumn extends CheckboxColumn
         $checkboxClass = self::CHECKBOXES_CSS_CLASS;
         $cbSelector = "#{$this->grid->id} .{$checkboxClass}";
 
+        $this->grid->view->registerJs("var anyControlCheckboxSelected = false;", View::POS_HEAD);
+
         $js = <<<EOD
-var anyControlCheckboxSelected = false;
 $("{$cbSelector}").change(function(){
     anyControlCheckboxSelected = $('#{$this->grid->id}').yiiGridView('getSelectedRows').length > 0;
     //console.log($('#{$this->grid->id}').yiiGridView('getSelectedRows').length);

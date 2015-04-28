@@ -36,7 +36,7 @@ JS;
     <p>
         <?= Html::a('Create Word', $ctrl->composeModuleUrl('create', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-success']) ?>
         <?= Html::a('Import from file', $ctrl->composeModuleUrl('import', 'word', ['episodeID' => $episodeID]), ['class' => 'btn-sm btn-primary']) ?>
-        <?= DeleteButton::widget(); ?>
+        <? echo DeleteButton::widget(); ?>
     </p>
 
     <?php
