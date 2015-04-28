@@ -89,8 +89,13 @@ class DeleteAction extends Action
         //$model = BWordSave::findModel($id);
 
         if ($model) {
-            //$model->delete();
+            $this->deleteCustom($model);
         }
+    }
+
+    protected function deleteCustom(ActiveRecordCustom $model)
+    {
+        $model->delete();
     }
 
     /**

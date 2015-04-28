@@ -2,7 +2,7 @@
 namespace backend\modules\translate\controllers\Movie;
 
 use backend\ext\Grid\Crud\DeleteAction;
-use backend\modules\translate\models\Word\BWordSave;
+use backend\modules\translate\models\Movie\BMovieSave;
 
 class MovieDeleteAction extends DeleteAction
 {
@@ -10,7 +10,7 @@ class MovieDeleteAction extends DeleteAction
     {
         parent::initConfig();
 
-        $this->modelClass = BWordSave::className();
+        $this->modelClass = BMovieSave::className();
     }
 
     public function run()

@@ -9,6 +9,7 @@ use backend\modules\translate\models\Word\BWordSearch;
 use backend\ext\Grid\Columns\BooleanColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -59,6 +60,14 @@ $episodeID = $ctrl->episodeCurrent->episodeID;
 
             [
                 'class' => BActionColumn::className(),
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    switch ($action) {
+                        case 'update':
+                            return Url::toRoute(['update', 'id' => $key, 'episodeID' => $model->episodeID]);
+                        case 'delete':
+                            return Url::toRoute(['delete', 'id' => $key, 'episodeID' => $model->episodeID]);
+                    }
+                }
             ],
         ],
         $filterUrl
