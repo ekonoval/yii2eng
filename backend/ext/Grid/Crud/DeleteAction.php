@@ -93,7 +93,10 @@ class DeleteAction extends Action
         }
     }
 
-    protected function deleteCustom(ActiveRecordCustom $model)
+    /**
+     * @param ActiveRecordCustom $model
+     */
+    protected function deleteCustom($model)
     {
         $model->delete();
     }
