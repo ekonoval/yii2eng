@@ -2,18 +2,25 @@
 
 namespace frontend\modules\translate\controllers;
 
-use yii\web\Controller;
+use frontend\ext\System\FrontendController;
+use frontend\modules\translate\models\FMovieSearch;
+use Yii;
 
-class MainController extends Controller
+class MainController extends FrontendController
 {
     public function actionMoviesIndex()
     {
-        return $this->render('index');
+//        $searchModel = new FMovieSearch();
+//        $dataProvider = $searchModel->search(yR()->get());
+//
+//        return $this->renderActionTpl([
+//            'dataProvider' => $dataProvider,
+//            'searchModel' => $searchModel
+//        ]);
     }
 
     public function actionTest()
     {
-
         echo "<h2>Vasya test  </h2>\n"; exit;
     }
 }
