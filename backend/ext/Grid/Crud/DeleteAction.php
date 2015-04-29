@@ -4,7 +4,9 @@ namespace backend\ext\Grid\Crud;
 use backend\ext\System\BackendController;
 use common\ext\System\ActiveRecordCustom;
 use common\ext\System\AppException;
+use Yii;
 use yii\base\Action;
+use yii\helpers\Html;
 
 /**
  * @property BackendController $controller
@@ -58,7 +60,7 @@ class DeleteAction extends Action
     {
         switch ($this->deleteType) {
             case self::TYPE_SINGLE:
-                $this->deleteSingle($this->id);
+                $this->deleteSingle($this->idSingle);
                 break;
 
             case self::TYPE_MULTI:
@@ -87,12 +89,43 @@ class DeleteAction extends Action
         //$model = BWordSave::findModel($id);
 
         if ($model) {
-            $model->delete();
+            $this->deleteCustom($model);
         }
+    }
+
+    /**
+     * @param ActiveRecordCustom $model
+     */
+    protected function deleteCustom($model)
+    {
+        $model->delete();
+    }
+
+    /**
+     * Non ajax
+     * @return \yii\web\Response
+     */
+    protected function redirectSingle()
+    {
+        return $this->controller->redirect('index');
+    }
+
+    /**
+     * For ajax
+     * @return string
+     */
+    protected function redirectMulti()
+    {
+        return "";
     }
 
     protected function redirectAfterDelete()
     {
-        return $this->controller->redirect('/');
+        if ($this->deleteType == self::TYPE_SINGLE) {
+            return $this->redirectSingle();
+        } else {
+            return $this->redirectMulti();
+        }
     }
+
 }

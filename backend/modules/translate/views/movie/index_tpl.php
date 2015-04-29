@@ -1,5 +1,6 @@
 <?php
 use backend\ext\Grid\BGridPjaxWidget;
+use backend\ext\Grid\Columns\BActionColumn;
 use backend\ext\System\BPjax;
 use backend\modules\translate\models\Movie\BMovieSearch;
 use common\ext\Helpers\DateHelper;
@@ -22,11 +23,10 @@ $this->title = 'Movies';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <? /* ?>
+
     <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn-sm btn-success']) ?>
+        <?= Html::a('Create Movie', $ctrl->composeModuleUrl('create', 'movie'), ['class' => 'btn-sm btn-success']) ?>
     </p>
-    <? */ ?>
 
     <?php
     $pjaxGrid = new BGridPjaxWidget(
@@ -56,8 +56,7 @@ $this->title = 'Movies';
             ],
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}',
+                'class' => BActionColumn::className(),
             ],
         ]
     );
