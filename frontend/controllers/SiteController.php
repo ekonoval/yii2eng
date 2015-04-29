@@ -67,10 +67,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        //echo "<h2>Vasya   </h2>\n";exit;
-        //Yii::$app->session->set('FRONT----------------', 3);
-        Yii::$app->session->has('fake');
-        var_dump($_SESSION);exit;
+//        Yii::$app->session->has('fake');
+//        var_dump($_SESSION);exit;
 
         return $this->render('index');
     }
