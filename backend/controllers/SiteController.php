@@ -98,6 +98,7 @@ class SiteController extends BackendController
 
         pa(array_merge($a, $b));
 
-        echo "<h2>Back test  </h2>\n"; exit;
+        echo "<h2>Back test  </h2>\n";
+        exit;
     }
 }

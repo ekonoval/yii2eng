@@ -11,11 +11,27 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+
+    'modules' => [
+        'translate' => [
+            'class' => 'frontend\modules\translate\TranslateFrontMod',
+        ],
+    ],
+
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+
+        'urlManager' => [
+            'rules' => array(
+                '/translate' => 'translate/main/movies-index',
+                '/translate\/<a:(?!main)[\w+\-]+>' => 'translate/main/<a>',
+                //'/translate/test/movieID/<id:\d+>' => 'translate/main/test',
+            )
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
