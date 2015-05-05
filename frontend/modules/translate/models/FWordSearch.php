@@ -1,6 +1,7 @@
 <?php
 namespace frontend\modules\translate\models;
 
+use common\models\Translate\TrEpisode;
 use common\models\Translate\TrWord;
 use yii\data\ActiveDataProvider;
 
@@ -14,9 +15,11 @@ class FWordSearch extends TrWord
     }
 
 
-    public function search($params)
+    public function search($movieID, $params)
     {
-        $query = static::find();
+//        $query = static::find()->with('episode');
+        $query = static::find()->innerJoinWith('episode')
+            ->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID]);
 
         $this->load($params);
 
@@ -28,19 +31,26 @@ class FWordSearch extends TrWord
         ]);
 
         if (!$this->validate()) {
-            pa("exit"); exit;
             return $dataProvider;
         }
 
-//        $query->andFilterWhere([
-//            'wordEN' => $this->wordEN,
-//            'wordRU' => $this->wordRU,
-//        ]);
-//        $query->andFilterWhere(['like', 'movieName', $this->movieName]);
+        $query->andFilterWhere([
+            'isHard' => $this->isHard,
+            'superHard' => $this->superHard
+        ]);
 
         $query->andFilterWhere(['like', 'wordEN', $this->wordEN]);
         $query->andFilterWhere(['like', 'wordRU', $this->wordRU]);
 
         return $dataProvider;
     }
+
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels["episodePlusSeasonString"] = "S/E";
+        return $labels;
+    }
+
+
 }

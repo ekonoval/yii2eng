@@ -1,4 +1,5 @@
 <?php
+use backend\ext\Grid\Columns\BooleanColumn;
 use frontend\ext\Grid\FGridPjaxWidget;
 use frontend\ext\System\FrontendController;
 use frontend\modules\translate\controllers\MainController;
@@ -19,6 +20,17 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
         [
             'wordEN',
             'wordRU',
+            [
+                'attribute' => 'isHard',
+                'class' => BooleanColumn::className()
+            ],
+            [
+                'attribute' => 'superHard',
+                'class' => BooleanColumn::className()
+            ],
+            [
+                'attribute' => 'episodePlusSeasonString'
+            ]
         ],
         $wordsUrl
     );

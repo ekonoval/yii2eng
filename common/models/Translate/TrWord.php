@@ -14,6 +14,7 @@ use Yii;
  * @property string $wordRU
  * @property integer $isHard
  * @property integer $superHard
+ * @property string $episodePlusSeasonString
  */
 class TrWord extends ActiveRecordCustom
 {
@@ -35,6 +36,16 @@ class TrWord extends ActiveRecordCustom
             'required' => [['wordEN', 'wordRU'], 'required'],
             [['wordEN', 'wordRU'], 'string', 'max' => 255]
         ];
+    }
+
+    public function getEpisodePlusSeasonString()
+    {
+        return "s{$this->episode->seasonNum}.e{$this->episode->episodeNum}";
+    }
+
+    public function getEpisode()
+    {
+        return $this->hasOne(TrEpisode::className(), ['episodeID' => 'episodeID'])->inverseOf('words');
     }
 
     /**
