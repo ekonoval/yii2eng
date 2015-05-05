@@ -44,7 +44,12 @@ class FWordSearch extends TrWord
 
         $query->andFilterWhere(['like', 'wordEN', $this->wordEN]);
         $query->andFilterWhere(['like', 'wordRU', $this->wordRU]);
-        $query->andFilterWhere(['in', static::composeTablePlusFieldName('episodeID'), explode(',', $this->episodeIds)]);
+
+        $episodeIds = !empty($this->episodeIds) ? explode(',', $this->episodeIds) : [];
+
+        if (!empty($episodeIds)) {
+            $query->andFilterWhere(['in', static::composeTablePlusFieldName('episodeID'), $episodeIds]);
+        }
 
         return $dataProvider;
     }

@@ -4,6 +4,7 @@ use frontend\ext\Grid\FGridPjaxWidget;
 use frontend\ext\System\FrontendController;
 use frontend\modules\translate\controllers\MainController;
 use frontend\modules\translate\ext\EpisodeIdsColumn;
+use frontend\modules\translate\ext\Widgets\EpisodesFilter\EpisodesFilterWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -14,10 +15,7 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
 <div class="translate-default-index">
     <h1>Words of ...</h1>
 
-    <fieldset>
-        <legend>Seasons/Episodes</legend>
-        <?= Html::checkboxList('s_e', [], $episodes); ?>
-    </fieldset>
+    <?php echo EpisodesFilterWidget::widget(['episodes' => $episodes]); ?>
 
     <?php
     $pjaxGrid = new FGridPjaxWidget(
