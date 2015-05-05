@@ -2,6 +2,7 @@
 use frontend\ext\Grid\FGridPjaxWidget;
 use frontend\ext\System\FrontendController;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var FrontendController $ctrl */
 $ctrl = $this->context;
@@ -20,8 +21,9 @@ $ctrl = $this->context;
             [
                 'attribute' => 'lnkEpisodes',
                 'value' => function($data) use ($ctrl){
-                    return Html::a("[episodes]",
-                        $ctrl->composeModuleUrl('index', 'episode', ['movieID' => $data->movieID]),
+                    return Html::a("[words]",
+                        //$ctrl->composeModuleUrl('words', 'main', ['movieID' => $data->movieID]),
+                        Url::to(['/translate/words', 'movieID' => $data->movieID]),
                         ['data-pjax' => 0]
                     );
                 },

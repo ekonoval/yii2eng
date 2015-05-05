@@ -19,6 +19,11 @@ class MainController extends FrontendController
         ]);
     }
 
+    public function actionWords()
+    {
+
+    }
+
     public function actionTest()
     {
         echo "<h2>Vasya test  </h2>\n"; exit;
