@@ -7,31 +7,6 @@ use yii\filters\AccessControl;
 
 class BackendController extends AppController
 {
-    /**
-     * Breadcrumps
-     * @var array
-     */
-    public $bc = [];
-
-    public function addBreadcrump($label, $url, $key = null)
-    {
-        $item = ['label' => $label, 'url' => $url];
-
-        if (!is_null($key)) {
-            $this->bc[$key] = $item;
-        } else {
-            $this->bc[] = $item;
-        }
-    }
-
-    protected function breadcrumps(){}
-
-    public function beforeAction($action)
-    {
-        $this->breadcrumps();
-        return parent::beforeAction($action);
-    }
-
 
     /**
      * @inheritdoc
