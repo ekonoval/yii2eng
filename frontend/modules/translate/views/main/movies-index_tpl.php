@@ -23,7 +23,7 @@ $ctrl = $this->context;
                 'value' => function($data) use ($ctrl){
                     return Html::a("[words]",
                         //$ctrl->composeModuleUrl('words', 'main', ['movieID' => $data->movieID]),
-                        Url::to(['/translate/words', 'movieID' => $data->movieID]),
+                        $ctrl->composeWordsUrl($data->movieID),
                         ['data-pjax' => 0]
                     );
                 },

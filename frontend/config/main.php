@@ -27,7 +27,7 @@ return [
         'urlManager' => [
             'rules' => array(
                 '/translate' => 'translate/main/movies-index',
-                '/translate\/<a:(?!main)[\w+\-]+>' => 'translate/main/<a>',
+                '/translate/<a:(?!main)[\w+\-]+>' => 'translate/main/<a>',
                 //'/translate/test/movieID/<id:\d+>' => 'translate/main/test',
             )
         ],
