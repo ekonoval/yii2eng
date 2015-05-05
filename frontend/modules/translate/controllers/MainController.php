@@ -10,13 +10,13 @@ class MainController extends FrontendController
 {
     public function actionMoviesIndex()
     {
-//        $searchModel = new FMovieSearch();
-//        $dataProvider = $searchModel->search(yR()->get());
-//
-//        return $this->renderActionTpl([
-//            'dataProvider' => $dataProvider,
-//            'searchModel' => $searchModel
-//        ]);
+        $searchModel = new FMovieSearch();
+        $dataProvider = $searchModel->search(yR()->get());
+
+        return $this->renderActionTpl([
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
     }
 
     public function actionTest()

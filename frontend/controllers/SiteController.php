@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\ext\System\FrontendController;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -16,7 +17,7 @@ use yii\filters\AccessControl;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends FrontendController
 {
     /**
      * @inheritdoc

@@ -5,5 +5,5 @@ use common\ext\System\AppController;
 
 class FrontendController extends AppController
 {
-
+    public $layout = "//layoutFrontMain.php";
 }
