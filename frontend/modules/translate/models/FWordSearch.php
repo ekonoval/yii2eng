@@ -7,13 +7,16 @@ use yii\data\ActiveDataProvider;
 
 class FWordSearch extends TrWord
 {
+    public $episodeIds;
+
     public function rules()
     {
         $rules = parent::rules();
         unset($rules["required"]);
+        $rules[] = [['episodeIds'], 'string'];
+
         return $rules;
     }
-
 
     public function search($movieID, $params)
     {
@@ -41,6 +44,7 @@ class FWordSearch extends TrWord
 
         $query->andFilterWhere(['like', 'wordEN', $this->wordEN]);
         $query->andFilterWhere(['like', 'wordRU', $this->wordRU]);
+        $query->andFilterWhere(['in', static::composeTablePlusFieldName('episodeID'), explode(',', $this->episodeIds)]);
 
         return $dataProvider;
     }
