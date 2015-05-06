@@ -10,6 +10,29 @@ if (!empty($this->context->episodes)) {
     #wordsControls a{
         cursor: pointer;
     }
+    #wordsControls .controls li{
+        display: inline-block;
+    }
+    #wordsControls .main-controls-last{
+        margin-right: 20px;
+    }
+
+    #episodesContainer .chb-season{
+        display: inline-block;
+        margin-right: 20px;
+        border-radius: 5px;
+        border: 1px solid #cccccc;
+    }
+
+    #episodesContainer .season-1,
+    #episodesContainer .season-3,
+    #episodesContainer .season-5,
+    #episodesContainer .season-7,
+    #episodesContainer .season-9{
+        background-color: #f7fdff;
+        background-color: #ECF2F4;
+        border: none;
+    }
 </style>
 
 <fieldset id="wordsControls">
@@ -23,7 +46,7 @@ if (!empty($this->context->episodes)) {
         <li>
             <?php echo Html::checkbox('hard_only_cb', false, ['id' => 'hardOnlyChb', 'label' => 'Hard only']) ?>
         </li>
-        <li>
+        <li class="main-controls-last">
             <?php echo Html::checkbox('super_hard_cb', false, ['id' => 'superHardChb', 'label' => 'Super hard']) ?>
         </li>
         <?php foreach($seasons as $seasonNum):
