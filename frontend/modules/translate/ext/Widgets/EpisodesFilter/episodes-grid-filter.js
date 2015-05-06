@@ -21,6 +21,11 @@ var EpisodeGridFilter = function (gridId) {
             return grid;
         },
 
+        updateGridWithSelection: function(){
+            o.setEpisodIdsFilterValue(o.getSelection());
+            o.updateGrid();
+        },
+
         setHardFilterValue: function (ctrlChbIsChecked, selector) {
             //if ($(ctrlChbObj).prop('checked')) {
             if (ctrlChbIsChecked) {
@@ -42,9 +47,7 @@ var EpisodeGridFilter = function (gridId) {
 
 
     $("#episodesContainer input[type=checkbox]").click(function(){
-
-        o.setEpisodIdsFilterValue(o.getSelection());
-        o.updateGrid();
+        o.updateGridWithSelection();
     });
 
     $("#wordsControls a.selectAll").click(function(){
@@ -52,17 +55,13 @@ var EpisodeGridFilter = function (gridId) {
         var checkBoxesAll = $("#episodesContainer .chb-season input[type=checkbox]");
         var checkBoxesSelectedSize = checkBoxesAll.filter(':checked').size();
 
-        console.log(checkBoxesSelectedSize , checkBoxesAll.size());
-
         if (checkBoxesSelectedSize > 0 && checkBoxesSelectedSize == checkBoxesAll.size()) {
             checkBoxesAll.prop('checked', false);
         } else {
-            console.log('selecting all', checkBoxesAll);
             checkBoxesAll.prop('checked', true);
         }
 
-        o.setEpisodIdsFilterValue(o.getSelection());
-        o.updateGrid();
+        o.updateGridWithSelection();
     });
 
     $("#hardOnlyChb").click(function(){
@@ -83,6 +82,12 @@ var EpisodeGridFilter = function (gridId) {
         }
 
         o.setHardFilterValue(thisChecked, '#superHardFilter');
+    });
+
+    $("#wordsControls .controls .seasonChb").click(function(){
+        var season = $(this).data('season');
+        $("#episodesContainer .season-"+season+" input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        o.updateGridWithSelection();
     });
 
     return o;

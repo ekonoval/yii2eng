@@ -1,5 +1,9 @@
 <?php
 use yii\helpers\Html;
+$seasons = [];
+if (!empty($this->context->episodes)) {
+    $seasons = array_keys($this->context->episodes);
+}
 ?>
 
 <style type="text/css">
@@ -22,6 +26,13 @@ use yii\helpers\Html;
         <li>
             <?php echo Html::checkbox('super_hard_cb', false, ['id' => 'superHardChb', 'label' => 'Super hard']) ?>
         </li>
+        <?php foreach($seasons as $seasonNum):
+        ?>
+            <li>
+                <?php echo Html::checkbox('season_cb', false, ['class' => 'seasonChb', 'data' => ['season' => $seasonNum], 'label' => "season {$seasonNum}"]) ?>
+            </li>
+        <?php endforeach; ?>
+
     </ul>
 
     <div id="episodesContainer">
