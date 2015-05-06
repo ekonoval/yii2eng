@@ -19,6 +19,16 @@ var EpisodeGridFilter = function (gridId) {
             var grid = $(gridId);
             grid.yiiGridView('applyFilter');
             return grid;
+        },
+
+        setHardFilterValue: function (ctrlChbIsChecked, selector) {
+            //if ($(ctrlChbObj).prop('checked')) {
+            if (ctrlChbIsChecked) {
+                $(selector).val(1);
+            } else {
+                $(selector).val('');
+            }
+            o.updateGrid();
         }
     };
 
@@ -26,19 +36,18 @@ var EpisodeGridFilter = function (gridId) {
      * After grid update set filter for episodeIds as hidden again
      */
     $(document).on('pjax:success', function(){
-        $(episodeIdsInputFilter).attr('type', 'hidden');
+        //$(episodeIdsInputFilter).attr('type', 'hidden');
     });
-    $(episodeIdsInputFilter).attr('type', 'hidden'); //on init
+    //$(episodeIdsInputFilter).attr('type', 'hidden'); //on init
 
 
     $("#episodesContainer input[type=checkbox]").click(function(){
 
         o.setEpisodIdsFilterValue(o.getSelection());
         o.updateGrid();
-        //console.log('click');
     });
 
-    $("#episodesContainer a.selectAll").click(function(){
+    $("#wordsControls a.selectAll").click(function(){
         //$("#episodesContainer .chb-season input[type=checkbox]").attr('checked', 'checked');
         var checkBoxesAll = $("#episodesContainer .chb-season input[type=checkbox]");
         var checkBoxesSelectedSize = checkBoxesAll.filter(':checked').size();
@@ -54,14 +63,26 @@ var EpisodeGridFilter = function (gridId) {
 
         o.setEpisodIdsFilterValue(o.getSelection());
         o.updateGrid();
+    });
 
-        //if (checkBoxesSelectedSize != checkBoxesAll.size()) {
-        //    checkBoxesAll.attr('checked', 'checked');
-        //} else {
-        //    console.log('ww');
-        //    checkBoxesAll.attr('checked', false);
-        //}
+    $("#hardOnlyChb").click(function(){
+        o.setHardFilterValue($(this).prop('checked'), '#hardOnlyFilter');
+    });
 
+    $("#superHardChb").click(function(){
+
+        var thisChecked = $(this).prop('checked');
+
+        /**
+         * The word could be superHard but not isHard (rare case).
+         * So deselect isHard checkbox on that case
+         */
+        if (thisChecked && $("#hardOnlyChb").prop('checked')) {
+            $("#hardOnlyChb").prop('checked', false);
+            o.setHardFilterValue(false, '#hardOnlyFilter');
+        }
+
+        o.setHardFilterValue(thisChecked, '#superHardFilter');
     });
 
     return o;

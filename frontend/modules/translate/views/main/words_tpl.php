@@ -26,11 +26,13 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
             'wordRU',
             [
                 'attribute' => 'isHard',
-                'class' => BooleanColumn::className()
+                'class' => BooleanColumn::className(),
+                'filterInputOptions' => ['class' => 'form-control', 'id' => 'hardOnlyFilter']
             ],
             [
                 'attribute' => 'superHard',
-                'class' => BooleanColumn::className()
+                'class' => BooleanColumn::className(),
+                'filterInputOptions' => ['class' => 'form-control', 'id' => 'superHardFilter']
             ],
             [
                 'attribute' => 'episodeIds',
