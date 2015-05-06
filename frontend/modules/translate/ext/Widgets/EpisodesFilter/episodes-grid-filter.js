@@ -13,6 +13,12 @@ var EpisodeGridFilter = function (gridId) {
 
         setEpisodIdsFilterValue: function (episodIds) {
             $(episodeIdsInputFilter).val(episodIds.join());
+        },
+
+        updateGrid: function () {
+            var grid = $(gridId);
+            grid.yiiGridView('applyFilter');
+            return grid;
         }
     };
 
@@ -26,11 +32,36 @@ var EpisodeGridFilter = function (gridId) {
 
 
     $("#episodesContainer input[type=checkbox]").click(function(){
-        var grid = $(gridId);
 
         o.setEpisodIdsFilterValue(o.getSelection());
-        grid.yiiGridView('applyFilter');
+        o.updateGrid();
         //console.log('click');
+    });
+
+    $("#episodesContainer a.selectAll").click(function(){
+        //$("#episodesContainer .chb-season input[type=checkbox]").attr('checked', 'checked');
+        var checkBoxesAll = $("#episodesContainer .chb-season input[type=checkbox]");
+        var checkBoxesSelectedSize = checkBoxesAll.filter(':checked').size();
+
+        console.log(checkBoxesSelectedSize , checkBoxesAll.size());
+
+        if (checkBoxesSelectedSize > 0 && checkBoxesSelectedSize == checkBoxesAll.size()) {
+            checkBoxesAll.prop('checked', false);
+        } else {
+            console.log('selecting all', checkBoxesAll);
+            checkBoxesAll.prop('checked', true);
+        }
+
+        o.setEpisodIdsFilterValue(o.getSelection());
+        o.updateGrid();
+
+        //if (checkBoxesSelectedSize != checkBoxesAll.size()) {
+        //    checkBoxesAll.attr('checked', 'checked');
+        //} else {
+        //    console.log('ww');
+        //    checkBoxesAll.attr('checked', false);
+        //}
+
     });
 
     return o;
