@@ -12,12 +12,12 @@ use yii\helpers\Url;
 
 class MainController extends FrontendController
 {
-    public function actionMoviesIndex()
+    public function actionMovies()
     {
         $searchModel = new FMovieSearch();
         $dataProvider = $searchModel->search(yR()->get());
 
-        return $this->renderActionTpl([
+        return $this->render('movies-index_tpl',[
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel
         ]);

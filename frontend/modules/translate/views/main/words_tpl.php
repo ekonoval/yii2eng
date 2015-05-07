@@ -44,6 +44,7 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
         ],
         $wordsUrl
     );
+    //$pjaxGrid->customHtml = "seed: " . $searchModel->curentRandSeed;
     $pjaxGrid->run();
     ?>
 </div>
