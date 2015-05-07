@@ -12,9 +12,10 @@ class FGridPjaxWidget extends Widget
     const GRID_JS_ID = 'mainGridId';
     protected $gridConfig;
 
+    public $customHtml;
+
     function __construct(ActiveRecord $searchModel, $dataProvider, $columns, $filterUrl = null, $gridConfig = [])
     {
-
         $customConfig = [
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
@@ -39,6 +40,10 @@ class FGridPjaxWidget extends Widget
         parent::run();
 
         BPjax::begin();
+
+        if (!empty($this->customHtml)) {
+            echo $this->customHtml;
+        }
 
         echo GridView::widget($this->gridConfig);
 
