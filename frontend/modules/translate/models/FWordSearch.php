@@ -22,12 +22,14 @@ class FWordSearch extends TrWord
     {
 //        $query = static::find()->with('episode');
         $query = static::find()->innerJoinWith('episode')
+            ->orderBy("RAND()")
             ->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID]);
 
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            //'sort' => ['defaultOrder' => ['episodeID' => SORT_DESC]],
             'pagination' => [
                 //'pageSize' => 1
             ]

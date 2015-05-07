@@ -20,8 +20,8 @@ if (!empty($this->context->episodes)) {
     #episodesContainer .chb-season{
         display: inline-block;
         margin-right: 20px;
-        border-radius: 5px;
-        border: 1px solid #cccccc;
+        /*border-radius: 5px;*/
+        /*border: 1px solid #cccccc;*/
     }
 
     #episodesContainer .season-1,
@@ -29,8 +29,8 @@ if (!empty($this->context->episodes)) {
     #episodesContainer .season-5,
     #episodesContainer .season-7,
     #episodesContainer .season-9{
-        background-color: #f7fdff;
-        background-color: #ECF2F4;
+        /*background-color: #f7fdff;*/
+        /*background-color: #ECF2F4;*/
         border: none;
     }
 </style>
