@@ -12,12 +12,12 @@ use yii\helpers\Url;
 
 class MainController extends FrontendController
 {
-    public function actionMoviesIndex()
+    public function actionMovies()
     {
         $searchModel = new FMovieSearch();
         $dataProvider = $searchModel->search(yR()->get());
 
-        return $this->renderActionTpl([
+        return $this->render('movies-index_tpl',[
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel
         ]);
@@ -29,7 +29,8 @@ class MainController extends FrontendController
         $dataProvider = $searchModel->search($movieID, yR()->get());
 
         //--- get seasons available ---//
-        $episodes = $this->getEpisodesAvailable($movieID);
+        //$episodes = $this->getEpisodesAvailable($movieID);
+        $episodes = $this->getEpisodesAvailableGroupped($movieID);
 
         return $this->renderActionTpl([
             'movieID' => $movieID,
@@ -37,6 +38,28 @@ class MainController extends FrontendController
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel
         ]);
+    }
+
+    private function getEpisodesAvailableGroupped($movieID)
+    {
+        $episodesRaw = TrEpisode::find()
+            ->andFilterWhere(['movieID' => $movieID])
+            ->addOrderBy([
+                'seasonNum' => SORT_ASC,
+                'episodeNum' => SORT_ASC,
+            ])
+            ->asArray()
+            ->all()
+        ;
+        //pa($episodesRaw);
+
+        $episodes = [];
+        foreach ($episodesRaw as $epVal) {
+            $seasonNum = $epVal["seasonNum"];
+            $episodes[$seasonNum][$epVal["episodeID"]] = "s{$seasonNum}.e{$epVal["episodeNum"]}";
+        }
+
+        return $episodes;
     }
 
     private function getEpisodesAvailable($movieID)
