@@ -1,6 +1,7 @@
 <?php
 namespace frontend\modules\translate\models;
 
+use common\ext\Helpers\GlobalHelper;
 use common\models\Translate\TrEpisode;
 use common\models\Translate\TrWord;
 use yii\data\ActiveDataProvider;
@@ -20,9 +21,22 @@ class FWordSearch extends TrWord
 
     public function search($movieID, $params)
     {
-//        $query = static::find()->with('episode');
+        $className = GlobalHelper::getClassNameWithoutNamespace(static::className());
+
+        $sessionfilterParamsHash = ySession()->get('wordsFilterHash');
+
+        if (isset($params[$className])) {
+            $filterParamsHash = md5(json_encode($params[$className]));
+        } else {
+            $filterParamsHash = "";
+        }
+
+        if ($sessionfilterParamsHash != $filterParamsHash) {
+            ySession()->set('wordsFilterHash', $filterParamsHash);
+        }
+
         $query = static::find()->innerJoinWith('episode')
-            ->orderBy("RAND()")
+            ->orderBy("RAND('{$filterParamsHash}')")
             ->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID]);
 
         $this->load($params);
