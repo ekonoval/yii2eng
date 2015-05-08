@@ -54,8 +54,12 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
             ],
             [
                 'attribute' => 'superHard',
-                'class' => BooleanColumn::className(),
-                'filterInputOptions' => ['class' => 'form-control', 'id' => 'superHardFilter']
+                //'class' => BooleanColumn::className(),
+                'class' => AjaxCheckboxColumn::className(),
+                'modelKeyUpdate' => 'superHard',
+                'action' => AjaxCheckboxColumn::ACTION_SUPER_HARD,
+                'ajaxCheckboxGroupClass' => 'ajaxCbSuperHard',
+                'filterInputOptions' => ['class' => 'form-control', 'id' => 'superHardFilter'],
             ],
             [
                 'attribute' => 'episodeIds',
