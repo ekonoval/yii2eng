@@ -64,6 +64,8 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
             [
                 'attribute' => 'episodeIds',
                 'class' => EpisodeIdsColumn::className(),
+                'headerOptions' => ['style' => 'width: 40px;'],
+                'contentOptions' => ['style' => 'text-align: center;'],
                 'value' => function ($model, $key, $index, $column) {
                     return $model->episodePlusSeasonString;
                 }

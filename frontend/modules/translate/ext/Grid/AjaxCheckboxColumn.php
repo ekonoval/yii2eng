@@ -16,6 +16,8 @@ class AjaxCheckboxColumn extends BooleanColumn
     public function init()
     {
         parent::init();
+        $this->headerOptions['style'] = 'width: 40px;';
+        $this->contentOptions["style"] = "text-align: center;";
 
         $ajaxUrl = "/translate/word-set-flag";
 
@@ -29,7 +31,7 @@ $("input.{$this->ajaxCheckboxGroupClass}").click(function(){
             action: '{$this->action}'
         },
         function (data) {
-            console.log(data);
+            //console.log(data);
         }
     );
 });
