@@ -4,6 +4,7 @@ use frontend\ext\Grid\FGridPjaxWidget;
 use frontend\ext\System\FrontendController;
 use frontend\modules\translate\controllers\MainController;
 use frontend\modules\translate\ext\EpisodeIdsColumn;
+use frontend\modules\translate\ext\Grid\AjaxCheckboxColumn;
 use frontend\modules\translate\ext\Grid\TranslationColumn;
 use frontend\modules\translate\ext\Widgets\EpisodesFilter\EpisodesFilterWidget;
 use yii\helpers\Html;
@@ -16,7 +17,7 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
 
 <style type="text/css">
     .td-transl{
-        position: relative;
+        /*position: relative;*/
         width: 50%;
     }
     .td-transl .trChbShow{
@@ -47,13 +48,18 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
             ],
             [
                 'attribute' => 'isHard',
-                'class' => BooleanColumn::className(),
+                //'class' => BooleanColumn::className(),
+                'class' => AjaxCheckboxColumn::className(),
                 'filterInputOptions' => ['class' => 'form-control', 'id' => 'hardOnlyFilter']
             ],
             [
                 'attribute' => 'superHard',
-                'class' => BooleanColumn::className(),
-                'filterInputOptions' => ['class' => 'form-control', 'id' => 'superHardFilter']
+                //'class' => BooleanColumn::className(),
+                'class' => AjaxCheckboxColumn::className(),
+                'modelKeyUpdate' => 'superHard',
+                'action' => AjaxCheckboxColumn::ACTION_SUPER_HARD,
+                'ajaxCheckboxGroupClass' => 'ajaxCbSuperHard',
+                'filterInputOptions' => ['class' => 'form-control', 'id' => 'superHardFilter'],
             ],
             [
                 'attribute' => 'episodeIds',

@@ -4,14 +4,21 @@ namespace frontend\modules\translate\controllers;
 
 use common\models\Translate\TrEpisode;
 use frontend\ext\System\FrontendController;
+use frontend\modules\translate\controllers\Main\WordSetFlagAction;
 use frontend\modules\translate\models\FMovieSearch;
 use frontend\modules\translate\models\FWordSearch;
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 class MainController extends FrontendController
 {
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['word-set-flag'] = ['class' => WordSetFlagAction::className()];
+        return $actions;
+    }
+
     public function actionMovies()
     {
         $searchModel = new FMovieSearch();
@@ -39,6 +46,11 @@ class MainController extends FrontendController
             'searchModel' => $searchModel
         ]);
     }
+
+//    public function actionWordSetHard($wordID)
+//    {
+//        echo "<h2>Vasya   </h2>\n";
+//    }
 
     private function getEpisodesAvailableGroupped($movieID)
     {

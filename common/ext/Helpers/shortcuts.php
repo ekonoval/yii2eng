@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * @return \yii\web\Application
+ */
+function yApp()
+{
+    return Yii::$app;
+}
+
+/**
  * @return \yii\web\Request
  */
 function yR()
