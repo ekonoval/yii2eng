@@ -16,8 +16,8 @@ class AjaxCheckboxColumn extends BooleanColumn
     public function init()
     {
         parent::init();
-        $this->headerOptions['style'] = 'width: 40px;';
-        $this->contentOptions["style"] = "text-align: center;";
+        $this->headerOptions['class'] = ' td-min';
+        $this->contentOptions["class"] = ' td-min';
 
         $ajaxUrl = "/translate/word-set-flag";
 
