@@ -24,7 +24,7 @@ class FWordSearch extends TrWord
     public function search($movieID, $params)
     {
         $this->handleRandSeed();
-        
+
         $randSortStr = "RAND('')";
         if (!empty($this->curentRandSeed)) {
             $randSortStr = "RAND('{$this->curentRandSeed}')";
