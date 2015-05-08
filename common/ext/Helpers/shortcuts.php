@@ -9,6 +9,14 @@ function yApp()
 }
 
 /**
+ * @return \yii\web\User
+ */
+function yUser()
+{
+    return Yii::$app->user;
+}
+
+/**
  * @return \yii\web\Request
  */
 function yR()

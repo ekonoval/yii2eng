@@ -4,12 +4,17 @@ namespace frontend\modules\translate\controllers\Main;
 use common\models\Translate\TrWord;
 use frontend\modules\translate\ext\Grid\AjaxCheckboxColumn;
 use yii\base\Action;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
 class WordSetFlagAction extends Action
 {
     public function run($action, $wordID, $val)
     {
+        if (yUser()->isGuest || yUser()->identity->username != 'sunsey') {
+            throw new ForbiddenHttpException("Your user is not able to set hard flags");
+        }
+
         yApp()->response->format = Response::FORMAT_JSON;
 
         $res = ['result' => 'ok'];
@@ -30,18 +35,6 @@ class WordSetFlagAction extends Action
                 $saveRes = $model->save();
             }
         }
-
-//        switch ($action) {
-//            case AjaxCheckboxColumn::ACTION_HARD:
-//                $model->isHard = $val;
-//                $saveRes = $model->save();
-//                break;
-//
-//            case AjaxCheckboxColumn::ACTION_SUPER_HARD:
-//                $model->superHard = $val;
-//                $saveRes = $model->save();
-//                break;
-//        }
 
         return $res;
     }
