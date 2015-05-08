@@ -4,6 +4,10 @@ namespace frontend\modules\translate\ext\Grid;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
 
+/**
+ * Checkbox + hidden translation contents.
+ * On checkbox click - display contents and set focus to next row checkbox
+ */
 class TranslationColumn extends DataColumn
 {
     public function init()
