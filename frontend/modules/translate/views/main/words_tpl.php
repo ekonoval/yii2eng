@@ -17,16 +17,15 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
 <style type="text/css">
     .td-transl{
         position: relative;
+        width: 50%;
     }
     .td-transl .trChbShow{
         width: 20px;
-        /*display: inline-block;*/
         float: left;
     }
     .td-transl .trShowContent{
         float: left;
         width: 94%;
-        /*display: inline-block;*/
     }
 </style>
 
