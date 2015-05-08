@@ -4,6 +4,7 @@ use frontend\ext\Grid\FGridPjaxWidget;
 use frontend\ext\System\FrontendController;
 use frontend\modules\translate\controllers\MainController;
 use frontend\modules\translate\ext\EpisodeIdsColumn;
+use frontend\modules\translate\ext\Grid\TranslationColumn;
 use frontend\modules\translate\ext\Widgets\EpisodesFilter\EpisodesFilterWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -12,6 +13,23 @@ use yii\helpers\Url;
 $ctrl = $this->context;
 $wordsUrl = $ctrl->composeWordsUrl($movieID);
 ?>
+
+<style type="text/css">
+    .td-transl{
+        position: relative;
+    }
+    .td-transl .trChbShow{
+        width: 20px;
+        /*display: inline-block;*/
+        float: left;
+    }
+    .td-transl .trShowContent{
+        float: left;
+        width: 94%;
+        /*display: inline-block;*/
+    }
+</style>
+
 <div class="translate-default-index">
     <h1>Words of ...</h1>
 
@@ -23,7 +41,11 @@ $wordsUrl = $ctrl->composeWordsUrl($movieID);
         $dataProvider,
         [
             'wordEN',
-            'wordRU',
+            //'wordRU',
+            [
+                'attribute' => 'wordRU',
+                'class' => TranslationColumn::className()
+            ],
             [
                 'attribute' => 'isHard',
                 'class' => BooleanColumn::className(),
