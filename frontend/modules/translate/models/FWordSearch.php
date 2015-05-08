@@ -69,6 +69,11 @@ class FWordSearch extends TrWord
             $randSortStr = "RAND('{$randSeed}')";
         }
 
+        // when sort is clicked - don't use random sort and allow grid to handle sorting
+        if (isset($params["sort"])) {
+            $randSortStr = "";
+        }
+
         $query = static::find()->innerJoinWith('episode')
             ->orderBy($randSortStr)
             ->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID]);
