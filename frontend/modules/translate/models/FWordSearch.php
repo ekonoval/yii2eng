@@ -21,52 +21,13 @@ class FWordSearch extends TrWord
         return $rules;
     }
 
-    private function getNumbersFromHash($hashStr)
-    {
-        $intStr = preg_replace('/[^\d]/', "", $hashStr);
-        /**
-         * PHP_IN_MAX 2147483647  - string length is 10.
-         * Prevent overflow by taking less digits
-         */
-        if (strlen($intStr) > 9) {
-            $intStr = intval(substr($intStr, 0, 9));
-        }
-        return $intStr;
-    }
-
     public function search($movieID, $params)
     {
-        $className = GlobalHelper::getClassNameWithoutNamespace(static::className());
-
-        $sessionfilterParamsHash = ySession()->get('wordsFilter.Hash');
-
-        if (isset($params[$className])) {
-            $filterParamsHash = md5(json_encode($params[$className]));
-        } else {
-            $filterParamsHash = "";
-        }
-
-        $randSeed = ySession()->get('wordsFilter.RandSeed', 0);
-
-        /**
-         * Filter changed. On pagination click filter and hash haven't changed which means that
-         * rand seeding is the same for all pages of specific filter combination
-         */
-        if ($sessionfilterParamsHash !== $filterParamsHash) {
-            ySession()->set('wordsFilter.Hash', $filterParamsHash);
-            /**
-             * The same filter combination have to display different result on non-paginational requests
-             */
-            $randSeed = $this->getNumbersFromHash($filterParamsHash);
-            $randSeed += rand(1,9999);
-            ySession()->set('wordsFilter.RandSeed', $randSeed);
-        }
-
-        $this->curentRandSeed = $randSeed;
-
+        $this->handleRandSeed();
+        
         $randSortStr = "RAND('')";
-        if (!empty($randSeed)) {
-            $randSortStr = "RAND('{$randSeed}')";
+        if (!empty($this->curentRandSeed)) {
+            $randSortStr = "RAND('{$this->curentRandSeed}')";
         }
 
         // when sort is clicked - don't use random sort and allow grid to handle sorting
@@ -128,6 +89,50 @@ class FWordSearch extends TrWord
         $labels = parent::attributeLabels();
         $labels["episodeIds"] = "S/E";
         return $labels;
+    }
+
+    private function handleRandSeed()
+    {
+        $className = GlobalHelper::getClassNameWithoutNamespace(static::className());
+
+        $sessionfilterParamsHash = ySession()->get('wordsFilter.Hash');
+
+        if (isset($params[$className])) {
+            $filterParamsHash = md5(json_encode($params[$className]));
+        } else {
+            $filterParamsHash = "";
+        }
+
+        $randSeed = ySession()->get('wordsFilter.RandSeed', 0);
+
+        /**
+         * Filter changed. On pagination click filter and hash haven't changed which means that
+         * rand seeding is the same for all pages of specific filter combination
+         */
+        if ($sessionfilterParamsHash !== $filterParamsHash) {
+            ySession()->set('wordsFilter.Hash', $filterParamsHash);
+            /**
+             * The same filter combination have to display different result on non-paginational requests
+             */
+            $randSeed = $this->getNumbersFromHash($filterParamsHash);
+            $randSeed += rand(1,9999);
+            ySession()->set('wordsFilter.RandSeed', $randSeed);
+        }
+
+        $this->curentRandSeed = $randSeed;
+    }
+
+    private function getNumbersFromHash($hashStr)
+    {
+        $intStr = preg_replace('/[^\d]/', "", $hashStr);
+        /**
+         * PHP_IN_MAX 2147483647  - string length is 10.
+         * Prevent overflow by taking less digits
+         */
+        if (strlen($intStr) > 9) {
+            $intStr = intval(substr($intStr, 0, 9));
+        }
+        return $intStr;
     }
 
 
