@@ -16,7 +16,7 @@ class FWordSearch extends TrWord
     {
         $rules = parent::rules();
         unset($rules["required"]);
-        $rules[] = [['episodeIds'], 'string'];
+        $rules[] = [['episodeIds'], 'safe'];
 
         return $rules;
     }
@@ -76,13 +76,28 @@ class FWordSearch extends TrWord
 
         $query = static::find()->innerJoinWith('episode')
             ->orderBy($randSortStr)
-            ->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID]);
+            //->andWhere(TrEpisode::tableName().".movieID = :movieID", [':movieID' => $movieID])
+            ->andWhere(TrEpisode::composeTablePlusFieldName('movieID')." = :movieID", [':movieID' => $movieID])
+        ;
 
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             //'sort' => ['defaultOrder' => ['episodeID' => SORT_DESC]],
+            'sort' => [
+                'attributes' => [
+                    'wordEN',
+                    'wordRU',
+                    'isHard' => ['default' => SORT_DESC],
+                    'superHard' => ['default' => SORT_DESC],
+                    'episodeIds' => [
+                        'asc' => ['seasonNum' => SORT_ASC, 'episodeNum' => SORT_ASC],
+                        'desc' => ['seasonNum' => SORT_DESC, 'episodeNum' => SORT_DESC],
+                        'default' => SORT_DESC
+                    ]
+                ]
+            ],
             'pagination' => [
                 //'pageSize' => 1
             ]
@@ -101,7 +116,6 @@ class FWordSearch extends TrWord
         $query->andFilterWhere(['like', 'wordRU', $this->wordRU]);
 
         $episodeIds = !empty($this->episodeIds) ? explode(',', $this->episodeIds) : [];
-
         if (!empty($episodeIds)) {
             $query->andFilterWhere(['in', static::composeTablePlusFieldName('episodeID'), $episodeIds]);
         }
@@ -112,7 +126,7 @@ class FWordSearch extends TrWord
     public function attributeLabels()
     {
         $labels = parent::attributeLabels();
-        $labels["episodePlusSeasonString"] = "S/E";
+        $labels["episodeIds"] = "S/E";
         return $labels;
     }
 

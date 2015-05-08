@@ -41,9 +41,9 @@ var EpisodeGridFilter = function (gridId) {
      * After grid update set filter for episodeIds as hidden again
      */
     $(document).on('pjax:success', function(){
-        //$(episodeIdsInputFilter).attr('type', 'hidden');
+        $(episodeIdsInputFilter).attr('type', 'hidden');
     });
-    //$(episodeIdsInputFilter).attr('type', 'hidden'); //on init
+    $(episodeIdsInputFilter).attr('type', 'hidden'); //on init
 
 
     $("#episodesContainer input[type=checkbox]").click(function(){
