@@ -8,6 +8,7 @@ class OtherController extends Controller
 
     public function actionTest()
     {
-        echo "<h2>Vasya test  </h2>\n";exit;
+        echo "<h2>Vasya test  </h2>\n";
+        exit;
     }
 }

@@ -2,14 +2,9 @@
 
 namespace backend\modules\translate;
 
-class TranslateMod extends \yii\base\Module
+use common\ext\System\AppModuleBase;
+
+class TranslateMod extends AppModuleBase
 {
-    public $controllerNamespace = 'backend\modules\translate\controllers';
 
-    public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }
 }

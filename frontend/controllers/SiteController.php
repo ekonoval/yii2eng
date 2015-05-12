@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\ext\System\FrontendController;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -16,7 +17,7 @@ use yii\filters\AccessControl;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends FrontendController
 {
     /**
      * @inheritdoc
@@ -67,10 +68,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        //echo "<h2>Vasya   </h2>\n";exit;
-        //Yii::$app->session->set('FRONT----------------', 3);
-        Yii::$app->session->has('fake');
-        var_dump($_SESSION);exit;
+//        Yii::$app->session->has('fake');
+//        var_dump($_SESSION);exit;
 
         return $this->render('index');
     }

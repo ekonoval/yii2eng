@@ -1,4 +1,5 @@
 <?php
+use frontend\ext\System\FrontendController;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -10,6 +11,8 @@ use frontend\widgets\Alert;
 /* @var $content string */
 
 AppAsset::register($this);
+/** @var FrontendController $ctrl */
+$ctrl = $this->context;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -32,11 +35,11 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Movies', 'url' => ['/translate/movies']],
             ];
+
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -56,7 +59,8 @@ AppAsset::register($this);
 
         <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'links' => isset($ctrl->bc) ? $ctrl->bc : null,
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>

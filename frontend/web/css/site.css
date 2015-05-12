@@ -89,3 +89,27 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+
+/*------------------| custom styles below |-----------------*/
+.spacer{
+    clear: both;
+}
+.grid-view{
+    position: relative;
+}
+.grid-view .pagination{
+    margin: 0 0 5px 0;
+    float: right;
+    display: block;
+}
+
+.grid-view .pagination > li > a,
+.grid-view .pagination > li > span{
+    padding: 3px 6px;
+}
+
+.grid-view .td-min{
+    width: 40px;
+    text-align: center;
+}

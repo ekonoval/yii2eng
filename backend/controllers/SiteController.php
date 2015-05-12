@@ -2,6 +2,8 @@
 namespace backend\controllers;
 
 use backend\ext\System\BackendController;
+use common\ext\Misc\FlashMessageCreator;
+use kartik\growl\GrowlAsset;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -60,44 +62,21 @@ class SiteController extends BackendController
         return $this->render('index');
     }
 
-//    public function actionLogin()
-//    {
-//        if (!\Yii::$app->user->isGuest) {
-//            return $this->goHome();
-//        }
-//
-//        //Yii::$app->session->set('fake', 1);
-//        //var_dump($_SESSION);exit;
-//        //var_dump(Yii::$app->security->generatePasswordHash('risking'));exit;
-//
-//        $model = new LoginForm();
-//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//            return $this->goBack();
-//        } else {
-//            return $this->render('login', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
-//
-//    public function actionLogout()
-//    {
-//        Yii::$app->user->logout();
-//
-//        return $this->goHome();
-//    }
-
-    public function actionTest()
+    public function actionGrowlTest()
     {
+        GrowlAsset::register($this->view);
 
-        $a = array('fake', "a" => "apple", "b" => "banana");
-        $b = array('bbbb', "a" => "pear", "b" => "strawberry", "c" => "cherry");
+        $fm = new FlashMessageCreator();
+        //$fm->addSuccess('hey hey php');
 
-        pa($a + $b);
-        //pa($b + $a);
+        $growlVar = 'var growl_ba94427d = {"delay":3000,"placement":{"from":"top","align":"right"},"type":"success","template":"<div id=\"w0\" class=\"alert col-xs-10 col-sm-10 col-md-3\"><button type=\"button\" class=\"close\" data-growl=\"dismiss\"><span aria-hidden=\"true\">&times;</span></button>\n<span data-growl=\"icon\"></span>\n<span data-growl=\"title\"></span>\n<span data-growl=\"message\"></span>\n<a href=\"#\" data-growl=\"url\"></a></div>"};';
+        $js =<<<JS
+$growlVar
+$.growl({"message":"hey hey","icon":"glyphicon glyphicon-ok-sign","title":"","url":""}, growl_ba94427d);
+JS;
 
-        pa(array_merge($a, $b));
+        $this->view->registerJs($js);
 
-        echo "<h2>Back test  </h2>\n"; exit;
+        return $this->render('index');
     }
 }

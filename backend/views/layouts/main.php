@@ -29,10 +29,9 @@ $ctrl = $this->context;
 </head>
 <body>
 
-
+<?php
 //Get all flash messages and loop through them
-<?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
-    <?php
+foreach (Yii::$app->session->getAllFlashes() as $message){
     echo Growl::widget([
         'type' => (!empty($message['type'])) ? $message['type'] : 'danger',
         //'title' => (!empty($message['title'])) ? Html::encode($message['title']) : 'Title Not Set!',
@@ -48,8 +47,7 @@ $ctrl = $this->context;
             ]
         ]
     ]);
-    ?>
-<?php endforeach; ?>
+ } ?>
 
 <?php $this->beginBody() ?>
 <div class="wrap">

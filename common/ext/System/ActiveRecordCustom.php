@@ -51,4 +51,12 @@ class ActiveRecordCustom extends ActiveRecord
             throw new NotFoundHttpException($failMsg);
         }
     }
+
+    public static function composeTablePlusFieldName($fieldName, $table = null)
+    {
+        if (is_null($table)) {
+            $table = static::tableName();
+        }
+        return "{$table}.{$fieldName}";
+    }
 }

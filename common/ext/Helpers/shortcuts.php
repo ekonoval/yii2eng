@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * @return \yii\web\Application
+ */
+function yApp()
+{
+    return Yii::$app;
+}
+
+/**
+ * @return \yii\web\User
+ */
+function yUser()
+{
+    return Yii::$app->user;
+}
+
+/**
  * @return \yii\web\Request
  */
 function yR()
