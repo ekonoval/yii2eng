@@ -62,12 +62,20 @@ class SiteController extends BackendController
         return $this->render('index');
     }
 
-    public function actionTest()
+    public function actionGrowlTest()
     {
         GrowlAsset::register($this->view);
 
-//        $fm = new FlashMessageCreator();
-//        $fm->addSuccess('hey hey');
+        $fm = new FlashMessageCreator();
+        //$fm->addSuccess('hey hey php');
+
+        $growlVar = 'var growl_ba94427d = {"delay":3000,"placement":{"from":"top","align":"right"},"type":"success","template":"<div id=\"w0\" class=\"alert col-xs-10 col-sm-10 col-md-3\"><button type=\"button\" class=\"close\" data-growl=\"dismiss\"><span aria-hidden=\"true\">&times;</span></button>\n<span data-growl=\"icon\"></span>\n<span data-growl=\"title\"></span>\n<span data-growl=\"message\"></span>\n<a href=\"#\" data-growl=\"url\"></a></div>"};';
+        $js =<<<JS
+$growlVar
+$.growl({"message":"hey hey","icon":"glyphicon glyphicon-ok-sign","title":"","url":""}, growl_ba94427d);
+JS;
+
+        $this->view->registerJs($js);
 
         return $this->render('index');
     }
