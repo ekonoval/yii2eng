@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ffb13b9e32a1dfd4a28aaa4324c90583",
+    "hash": "e816dffa04d39e08793ff143cbddf435",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -348,6 +348,97 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "kartik-v/yii2-builder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-builder.git",
+                "reference": "648314607dac6895002c939a39383fcb96193fc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-builder/zipball/648314607dac6895002c939a39383fcb96193fc2",
+                "reference": "648314607dac6895002c939a39383fcb96193fc2",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-grid": "*",
+                "kartik-v/yii2-krajee-base": "*",
+                "kartik-v/yii2-widget-activeform": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\builder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Build forms (single-row or multi-row/tabular) easily for Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-builder",
+            "keywords": [
+                "builder",
+                "extension",
+                "form",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-05-05 07:56:58"
+        },
+        {
+            "name": "kartik-v/yii2-grid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-grid.git",
+                "reference": "d7c7f74a9de79929edc51822daf31333abb66dbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/d7c7f74a9de79929edc51822daf31333abb66dbb",
+                "reference": "d7c7f74a9de79929edc51822daf31333abb66dbb",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\grid\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Yii 2 GridView on steroids. Various enhancements and utilities for the Yii 2.0 GridView widget.",
+            "homepage": "https://github.com/kartik-v/yii2-grid",
+            "keywords": [
+                "extension",
+                "grid",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-05-15 16:19:14"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "dev-master",
             "source": {
@@ -357,7 +448,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/02ad8f746a123918094bba9492559d62e7161c68",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/b5d820b998c0cb169786050ee783054f6b6f4b92",
                 "reference": "02ad8f746a123918094bba9492559d62e7161c68",
                 "shasum": ""
             },
@@ -392,6 +483,53 @@
                 "yii2"
             ],
             "time": "2015-04-22 08:27:29"
+        },
+        {
+            "name": "kartik-v/yii2-widget-activeform",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
+                "reference": "9666688fe5696bb7c43bf4de00d46caca418617c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/9666688fe5696bb7c43bf4de00d46caca418617c",
+                "reference": "9666688fe5696bb7c43bf4de00d46caca418617c",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\form\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 active-form and active-field with full bootstrap styling support (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-activeform",
+            "keywords": [
+                "activefield",
+                "activeform",
+                "extension",
+                "field",
+                "form",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-05-10 19:44:05"
         },
         {
             "name": "kartik-v/yii2-widget-growl",
@@ -452,7 +590,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/728eba28e355e081b0729b4c18cb9c13abe12560",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/ac8b475454c120bfb31f5bef475233dd4fb6b626",
                 "reference": "728eba28e355e081b0729b4c18cb9c13abe12560",
                 "shasum": ""
             },
@@ -592,7 +730,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/72da96e3af490bbb240fd04c32bb445dcb5421ae",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/dbb0ed704ed892a2c3623fb12f6691690b42a711",
                 "reference": "72da96e3af490bbb240fd04c32bb445dcb5421ae",
                 "shasum": ""
             },
@@ -642,7 +780,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/24f53b745b6517258aedcff4f7dda7459aae503b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/c7f59a6db76ae12aef4ddd244b0d02ab76b8a0b8",
                 "reference": "24f53b745b6517258aedcff4f7dda7459aae503b",
                 "shasum": ""
             },
@@ -689,7 +827,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/3a92b5eaa4e3d07940437552ee86450a20bc908c",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/e1ad1c7ec2ffc0375755c3152e5cd67aa9b83959",
                 "reference": "3a92b5eaa4e3d07940437552ee86450a20bc908c",
                 "shasum": ""
             },
@@ -739,7 +877,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/a30c1ce8487d12c81af0aec177ad5d77bc1692ee",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/a6bef7f792543832701e73889b4b7b7704302967",
                 "reference": "a30c1ce8487d12c81af0aec177ad5d77bc1692ee",
                 "shasum": ""
             },
@@ -818,7 +956,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/901bde792eddf6907f33634ff8aafb2dfddd4784",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fd5c3ce72bd135afc882304663385328c6609485",
                 "reference": "901bde792eddf6907f33634ff8aafb2dfddd4784",
                 "shasum": ""
             },
@@ -904,7 +1042,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/71bde805b9e063215114dd4ff9b9978ec1505283",
+                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/b3407b0c8614c1d614c5c58287816027ba98418b",
                 "reference": "71bde805b9e063215114dd4ff9b9978ec1505283",
                 "shasum": ""
             },
@@ -949,7 +1087,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/14ef93a0b75bd1c2d6b6eac69ffe33ff3df47560",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/9a945c208f20c129da4fcfe5e8110e0c113c7871",
                 "reference": "14ef93a0b75bd1c2d6b6eac69ffe33ff3df47560",
                 "shasum": ""
             },
@@ -996,7 +1134,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/8f9beea41bc47c8d3100edc822f589fb2b6cdc71",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/66432de272e5795435dc7da49381ea7bea2a2a67",
                 "reference": "8f9beea41bc47c8d3100edc822f589fb2b6cdc71",
                 "shasum": ""
             },
@@ -1043,7 +1181,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/b0ed0ad42de3f9539c935b36794b880f78f9c39b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/1a889d35d7e30b5c56820cc4ec1d7bdacd69244b",
                 "reference": "b0ed0ad42de3f9539c935b36794b880f78f9c39b",
                 "shasum": ""
             },
@@ -1089,7 +1227,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-builder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

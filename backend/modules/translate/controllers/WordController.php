@@ -157,4 +157,20 @@ class WordController extends TranslateController
         return $this->composeModuleUrl('index', 'word', ['episodeID' => $episodeID]);
     }
 
+    public function actionBuilder()
+    {
+        $wordID = 5176;
+        $model = TrWord::findModel($wordID);
+
+        if (
+            yR()->isPost
+            && $model->load(yR()->post())
+            && $model->save()
+        ) {
+            return $this->redirect($this->composeWordsIndex($model->episodeID));
+        } else {
+            //pa($model->getErrors());
+            return $this->render('word_form_builder_tpl', ['model' => $model]);
+        }
+    }
 }
