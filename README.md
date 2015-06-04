@@ -1,6 +1,12 @@
 Yii 2 Advanced Application Template
 ===================================
 
+Setup:
+1. configure virtualhost to folder frontend/web as DocumentRoot
+2. create a symlink of backend/web to frontend/web/admin - then you can reach backend part on the url site.com/admin
+
+
+
 Yii 2 Advanced Application Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
 
