@@ -71,6 +71,10 @@ foreach (Yii::$app->session->getAllFlashes() as $message){
                 'label' => 'Movies',
                 'url' => Url::to(['/translate/movie/index'])
             ];
+            $menuItems[] = [
+                'label' => 'Admin crud',
+                'url' => Url::to(['/auth/admin-crud/'])
+            ];
 
             $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . " - {$roleName}". ')',
