@@ -13,6 +13,7 @@ class ConsoleBackendPhpAuthManager extends BPhpAuthManager
      */
     protected function saveToFile($data, $file)
     {
+        @mkdir(dirname($file), 0777, true);
         PhpManager::saveToFile($data, $file);
     }
 
